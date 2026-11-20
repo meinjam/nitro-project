@@ -68,7 +68,7 @@ export function HeroSection() {
         className="mx-auto w-full max-w-[1920px] px-5 sm:px-10 lg:px-14 xl:px-[88px]"
       >
         <div className="flex flex-col items-center gap-7 text-center lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-end lg:gap-8 lg:text-left">
-          <p className="max-w-[464px] text-[14px] sm:text-[16px] font-normal uppercase leading-[24px] text-white">
+          <p className="max-w-[495px] text-[14px] sm:text-[15px] xl:text-[16px] font-normal uppercase leading-[24px] text-white">
             Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero et velit interdum, ac.
           </p>
