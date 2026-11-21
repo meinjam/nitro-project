@@ -10,7 +10,7 @@ export function CanRightShadow({ uid }: { uid: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      className="pointer-events-none absolute top-1/2 -right-[40%] z-[8] w-[77.5%] h-[130.8%] -translate-y-1/2"
+      className="pointer-events-none absolute top-1/2 right-[-40%] z-8 w-[77.5%] h-[130.8%] -translate-y-1/2"
     >
       <g filter={`url(#${filterId})`}>
         <ellipse cx="64.9174" cy="288.939" rx="21.8602" ry="245.882" fill="black" />
@@ -50,7 +50,7 @@ export function FlankingCanShadow({ className }: { className: string }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute left-1/2 z-[5] h-auto -translate-x-1/2",
+        "pointer-events-none absolute left-1/2 z-5 h-auto -translate-x-1/2",
         className
       )}
     >
@@ -72,7 +72,7 @@ export function NitroGreenPedestal({
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute left-1/2 -bottom-[6.9%] z-[5] w-[126.65%] -translate-x-1/2"
+      className="pointer-events-none absolute left-1/2 bottom-[-6.9%] z-5 w-[126.65%] -translate-x-1/2"
     >
       <div ref={pedestalRef} className="w-full will-change-transform">
         <svg

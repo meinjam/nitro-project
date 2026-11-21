@@ -30,9 +30,9 @@ export function ShopSection({
     <section
       id="shop"
       ref={sectionRef}
-      className="nitro-radial-bg relative flex min-h-[100svh] w-full items-center overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20"
+      className="nitro-radial-bg relative flex min-h-svh w-full items-center overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20"
     >
-      <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-[120px]">
+      <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-30">
         {/* Desktop & Tablet 5-Can Stepped Showcase (exact Figma Energy Drink 003) */}
         <div className="hidden md:grid grid-cols-[8.73fr_10.31fr_13.36fr_10.31fr_8.73fr] items-end gap-x-[4vw] lg:gap-x-[5.5vw] xl:gap-x-[7.5vw]">
           {NITRO_PRODUCTS.map((product, idx) => {
@@ -47,14 +47,14 @@ export function ShopSection({
                 isCenter={isCenter}
                 shadowClassName={
                   isInner
-                    ? "w-[109.6%] -bottom-[2.6%]"
-                    : "w-[100.8%] -bottom-[2.3%]"
+                    ? "w-[109.6%] bottom-[-2.6%]"
+                    : "w-[100.8%] bottom-[-2.3%]"
                 }
                 canAnchorRef={isCenter ? desktopCenterCanRef : undefined}
                 pedestalRef={isCenter ? desktopPedestalRef : undefined}
                 hideStaticCan={hideStaticCan}
                 cardClassName={
-                  isCenter ? "translate-y-[30px] xl:translate-y-[38px]" : ""
+                  isCenter ? "translate-y-7.5 xl:translate-y-9.5" : ""
                 }
               />
             );
@@ -70,16 +70,16 @@ export function ShopSection({
             canAnchorRef={mobileCenterCanRef}
             pedestalRef={mobilePedestalRef}
             hideStaticCan={hideStaticCan}
-            cardClassName="w-[190px] sm:w-[220px]"
+            cardClassName="w-47.5 sm:w-55"
           />
 
-          <div className="grid w-full max-w-[440px] grid-cols-2 gap-x-8 gap-y-10">
+          <div className="grid w-full max-w-110 grid-cols-2 gap-x-8 gap-y-10">
             {FLANKING_PRODUCTS.map((product) => (
               <ShopProductCard
                 key={product.id}
                 product={product}
                 variant="mobile"
-                canWrapperClassName="w-[118px] sm:w-[140px]"
+                canWrapperClassName="w-29.5 sm:w-35"
               />
             ))}
           </div>

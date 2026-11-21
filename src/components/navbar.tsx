@@ -32,15 +32,15 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 will-change-transform transition-[background-color,border-color,backdrop-filter] duration-300",
         scrolled || mobileOpen
-          ? "border-b border-white/[0.06] bg-black/80 backdrop-blur-md"
+          ? "border-b border-white/6 bg-black/80 backdrop-blur-md"
           : "border-b border-transparent bg-transparent",
         isShown ? "pointer-events-auto" : "pointer-events-none"
       )}
     >
       <div
         className={cn(
-          "mx-auto flex w-full max-w-[1920px] items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-[88px] transition-[height] duration-300",
-          scrolled ? "h-[64px] sm:h-[76px]" : "h-[76px] sm:h-[108px]"
+          "mx-auto flex w-full max-w-[1920px] items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-22 transition-[height] duration-300",
+          scrolled ? "h-16 sm:h-19" : "h-19 sm:h-27"
         )}
       >
         <a href="#home" aria-label="NiTRO Home" className="shrink-0">
@@ -48,19 +48,19 @@ export function Navbar() {
             src={nitroLogo}
             alt="NiTRO"
             priority
-            className="h-[18px] sm:h-[22px] w-auto object-contain"
+            className="h-4.5 sm:h-5.5 w-auto object-contain"
           />
         </a>
 
         <nav
           aria-label="Primary"
-          className="hidden lg:flex items-center justify-between w-full max-w-[848px] mx-8"
+          className="hidden lg:flex items-center justify-between w-full max-w-212 mx-8"
         >
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-[16px] font-normal leading-[24px] text-white transition-colors duration-200 hover:text-[#e0e600]"
+              className="text-[16px] font-normal leading-6 text-white transition-colors duration-200 hover:text-[#e0e600]"
             >
               {link.label}
             </a>
@@ -70,7 +70,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <a
             href="#shop"
-            className="hidden sm:inline-flex h-[44px] w-[153px] items-center justify-center bg-[#e0e600] text-[16px] font-medium leading-[24px] text-black transition-opacity duration-200 hover:opacity-90"
+            className="hidden sm:inline-flex h-11 w-38.25 items-center justify-center bg-[#e0e600] text-[16px] font-medium leading-6 text-black transition-opacity duration-200 hover:opacity-90"
           >
             Buy Now
           </a>
@@ -83,13 +83,13 @@ export function Navbar() {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             className={cn(
-              "inline-flex lg:hidden h-[40px] w-[40px] items-center justify-center border transition-colors duration-200 cursor-pointer",
+              "inline-flex lg:hidden h-10 w-10 items-center justify-center border transition-colors duration-200 cursor-pointer",
               mobileOpen
                 ? "border-[#e0e600] text-[#e0e600]"
                 : "border-white/25 text-white hover:border-[#e0e600] hover:text-[#e0e600]"
             )}
           >
-            <span className="relative h-[14px] w-[18px]" aria-hidden="true">
+            <span className="relative h-3.5 w-4.5" aria-hidden="true">
               <motion.span
                 initial={false}
                 animate={
@@ -164,7 +164,7 @@ export function Navbar() {
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 onClick={() => setMobileOpen(false)}
-                className="mt-4 flex h-[44px] w-full items-center justify-center bg-[#e0e600] text-[16px] font-medium text-black"
+                className="mt-4 flex h-11 w-full items-center justify-center bg-[#e0e600] text-[16px] font-medium text-black"
               >
                 Buy Now
               </motion.a>

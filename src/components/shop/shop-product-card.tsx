@@ -27,7 +27,7 @@ export function ShopProductCard({
   product,
   variant,
   isCenter = false,
-  shadowClassName = "w-[105%] -bottom-[2.4%]",
+  shadowClassName = "w-[105%] bottom-[-2.4%]",
   canAnchorRef,
   pedestalRef,
   hideStaticCan = false,
@@ -61,7 +61,7 @@ export function ShopProductCard({
         <CanRightShadow uid={`${variant}-${product.id}`} />
 
         {isCenter ? (
-          <div ref={canAnchorRef} className="relative z-[10] aspect-[340/896] w-full">
+          <div ref={canAnchorRef} className="relative z-10 aspect-340/896 w-full">
             <NitroCan
               alt={product.name}
               orientation="vertical"
@@ -73,7 +73,7 @@ export function ShopProductCard({
             alt={product.name}
             orientation="vertical"
             hueColor={product.hueColor}
-            className="z-[10]"
+            className="z-10"
           />
         )}
       </div>
@@ -81,11 +81,11 @@ export function ShopProductCard({
       {/* Product Typography */}
       <div
         className={cn(
-          "relative z-[10] flex flex-col items-center text-center",
+          "relative z-10 flex flex-col items-center text-center",
           isDesktop
             ? isCenter
-              ? "mt-8 lg:mt-10 xl:mt-[48px]"
-              : "mt-7 lg:mt-9 xl:mt-[46px]"
+              ? "mt-8 lg:mt-10 xl:mt-12"
+              : "mt-7 lg:mt-9 xl:mt-11.5"
             : isCenter
               ? "mt-8"
               : "mt-6"
@@ -98,10 +98,10 @@ export function ShopProductCard({
           className={cn(
             "w-auto object-contain",
             isDesktop
-              ? "h-[15px] lg:h-[18px] xl:h-[21px]"
+              ? "h-3.75 lg:h-4.5 xl:h-5.25"
               : isCenter
-                ? "h-[19px]"
-                : "h-[15px]"
+                ? "h-4.75"
+                : "h-3.75"
           )}
           draggable={false}
         />
@@ -109,7 +109,7 @@ export function ShopProductCard({
           className={cn(
             "text-white/[0.58]",
             isDesktop
-              ? "mt-1.5 text-[13px] lg:text-[15px] xl:text-[17px] font-normal leading-[1.5] whitespace-nowrap"
+              ? "mt-1.5 text-[13px] lg:text-[15px] xl:text-[17px] font-normal leading-normal whitespace-nowrap"
               : isCenter
                 ? "mt-1.5 text-[16px]"
                 : "mt-1 text-[14px]"
@@ -121,7 +121,7 @@ export function ShopProductCard({
           className={cn(
             "mt-0.5 font-extrabold text-white",
             isDesktop
-              ? "text-[18px] lg:text-[21px] xl:text-[24px] leading-[1.5] whitespace-nowrap"
+              ? "text-[18px] lg:text-[21px] xl:text-[24px] leading-normal whitespace-nowrap"
               : isCenter
                 ? "text-[22px]"
                 : "text-[18px]"

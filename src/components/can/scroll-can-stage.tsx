@@ -16,8 +16,8 @@ interface ScrollCanStageProps {
 }
 
 /**
- * Floating GPU-composited stage (`z-[15]`) that animates the NiTRO GREEN can
- * across Hero -> About (behind tagline `z-[25]`) -> Shop center pedestal.
+ * Floating GPU-composited stage (`z-15`) that animates the NiTRO GREEN can
+ * across Hero -> About (behind tagline `z-25`) -> Shop center pedestal.
  */
 export function ScrollCanStage({
   visible,
@@ -37,14 +37,14 @@ export function ScrollCanStage({
     >
       <div
         ref={canStageRef}
-        className="pointer-events-none absolute top-0 left-0 z-[15] will-change-transform"
+        className="pointer-events-none absolute top-0 left-0 z-15 will-change-transform"
         style={{ opacity: 0 }}
       >
         <div ref={floatWrapperRef} className="relative h-full w-full will-change-transform">
           {/* Hero floor shadow (fades out during Phase 1: Hero -> About) */}
           <div
             ref={heroShadowRef}
-            className="pointer-events-none absolute -left-[5.6%] -bottom-[27.4%] z-0 w-[121.65%] will-change-transform"
+            className="pointer-events-none absolute left-[-5.6%] bottom-[-27.4%] z-0 w-[121.65%] will-change-transform"
           >
             <Image
               src={canHeroShadow}
@@ -58,7 +58,7 @@ export function ScrollCanStage({
           {/* About deep ground shadow: pure radial gradient (zero live blur filter for 60/120fps scroll) */}
           <div
             ref={aboutShadowRef}
-            className="pointer-events-none absolute -bottom-[24%] -left-[4%] -right-[4%] z-0 h-[56%]"
+            className="pointer-events-none absolute bottom-[-24%] left-[-4%] right-[-4%] z-0 h-[56%]"
             style={{
               background:
                 "radial-gradient(ellipse 50% 48% at 50% 50%, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.62) 48%, rgba(0, 0, 0, 0) 100%)",
