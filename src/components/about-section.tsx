@@ -3,9 +3,9 @@
 import type { RefObject } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import canGreenHorizontal from "@/assets/can-green-horizontal.png";
 import heroSoccer from "@/assets/hero-soccer.png";
 import since2002Producing from "@/assets/since-2002-producing.png";
+import { NitroCan } from "./can/nitro-can";
 
 interface AboutSectionProps {
   sectionRef?: RefObject<HTMLElement | null>;
@@ -49,16 +49,11 @@ export function AboutSection({
             {/* Mobile/Tablet Horizontal Can Anchor (untransformed for exact GSAP measurement) */}
             <div
               ref={mobileCanAnchorRef}
-              className="relative z-[10] -mt-14 mx-auto aspect-[1485/564] w-[92%] sm:w-[82%] lg:hidden"
+              className="relative z-[10] -mt-14 mx-auto aspect-[896/340] w-[92%] sm:w-[82%] lg:hidden"
             >
-              <Image
-                src={canGreenHorizontal}
-                alt="Nitro Green oversized horizontal can"
-                className={`h-full w-full object-contain drop-shadow-[0_24px_32px_rgba(0,0,0,0.9)] ${
-                  hideStaticCan ? "opacity-0 invisible" : ""
-                }`}
-                draggable={false}
-              />
+              {!hideStaticCan && (
+                <NitroCan alt="Nitro Green oversized horizontal can" />
+              )}
             </div>
           </div>
 
@@ -66,26 +61,28 @@ export function AboutSection({
           <div className="hidden lg:flex pointer-events-none absolute inset-y-0 left-[8%] right-[9%] z-[10] items-center justify-center">
             <div
               ref={desktopCanAnchorRef}
-              className="relative aspect-[1485/564] w-full max-w-[1488px]"
+              className="relative aspect-[896/340] w-full max-w-[1488px]"
             >
               {!hideStaticCan && (
-                <div
-                  className="absolute -bottom-[8%] left-[6%] right-[5%] h-[20%] rounded-full bg-black/85 blur-3xl"
-                  aria-hidden="true"
-                />
+                <>
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -bottom-[24%] -left-[4%] -right-[4%] z-0 h-[56%]"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse 50% 48% at 50% 50%, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.62) 48%, rgba(0, 0, 0, 0) 100%)",
+                    }}
+                  />
+                  <NitroCan
+                    alt="Nitro Green oversized horizontal can"
+                    className="z-10"
+                  />
+                </>
               )}
-              <Image
-                src={canGreenHorizontal}
-                alt="Nitro Green oversized horizontal can"
-                className={`relative h-full w-full object-contain drop-shadow-[0_34px_46px_rgba(0,0,0,0.92)] ${
-                  hideStaticCan ? "opacity-0 invisible" : ""
-                }`}
-                draggable={false}
-              />
             </div>
           </div>
 
-          {/* Right: Exact Sakana Tagline "SiNCE 2002 PROD UCING" (z-[25]: IN FRONT OF animated can z-[15]) */}
+          {/* Right: Tagline "SiNCE 2002 PROD UCING" (z-[25]: IN FRONT OF animated can z-[15]) */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}

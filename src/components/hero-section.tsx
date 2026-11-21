@@ -3,11 +3,10 @@
 import type { RefObject } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import canBaseHorizontal from "@/assets/can-base-horizontal.png";
-import canCoverGreen from "@/assets/can-cover-green.png";
 import canHeroShadow from "@/assets/can-hero-shadow.png";
 import nitroWordmark from "@/assets/nitro-wordmark.png";
-import { SocialIcons } from "./SocialIcons";
+import { NitroCan } from "./can/nitro-can";
+import { SocialIcons } from "./social-icons";
 
 interface HeroSectionProps {
   canAnchorRef?: RefObject<HTMLDivElement | null>;
@@ -25,7 +24,7 @@ export function HeroSection({
     >
       <div className="h-2 sm:h-4" aria-hidden="true" />
 
-      {/* Centerpiece: Giant NiTRO Wordmark + Figma Layered Can Anchor (1:40) */}
+      {/* Centerpiece: Giant NiTRO Wordmark + Untransformed Can Measurement Anchor */}
       <div className="relative mx-auto my-auto flex w-full max-w-[1920px] items-center justify-center px-4 sm:px-10 lg:px-14 xl:px-[88px] py-8">
         <h1 className="sr-only">NiTRO Energy Drink</h1>
 
@@ -44,13 +43,12 @@ export function HeroSection({
           />
         </motion.div>
 
-        {/* Untransformed layout anchor for pixel-accurate GSAP ScrollTrigger measurements */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <div
             ref={canAnchorRef}
             className="relative aspect-[896/340] w-[65%] sm:w-[56%] lg:w-[51.3%] max-w-[896px]"
           >
-            {/* Static / reduced-motion fallback can (hidden once ScrollCanStage takes over) */}
+            {/* Static / reduced-motion fallback can (hidden while ScrollCanStage is active) */}
             <motion.div
               initial={{ opacity: 0, x: -36, scale: 0.94 }}
               animate={{ opacity: hideStaticCan ? 0 : 1, x: 0, scale: 1 }}
@@ -66,7 +64,6 @@ export function HeroSection({
                 transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
                 className="relative h-full w-full"
               >
-                {/* Child 1 (1:41): Ellipse 1 Shadow */}
                 <Image
                   src={canHeroShadow}
                   alt=""
@@ -75,47 +72,18 @@ export function HeroSection({
                   className="pointer-events-none absolute -left-[5.6%] -bottom-[27.4%] z-0 w-[121.65%] max-w-none h-auto select-none"
                   draggable={false}
                 />
-
-                {/* Isolated Can Body Composition (1:42 + 1:43 Mask Group) */}
-                <div className="relative z-10 isolate h-full w-full">
-                  {/* Child 2 (1:42): Metallic Aluminum Can Base with Water Droplets */}
-                  <Image
-                    src={canBaseHorizontal}
-                    alt="Nitro Green energy drink can"
-                    priority
-                    className="h-full w-full object-fill select-none"
-                    draggable={false}
-                  />
-
-                  {/* Child 3 (1:43): Mask group (1:44 Can silhouette + 1:45 Cover wrap) */}
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 overflow-hidden mix-blend-color-burn"
-                    style={{
-                      maskImage: `url(${canBaseHorizontal.src})`,
-                      WebkitMaskImage: `url(${canBaseHorizontal.src})`,
-                      maskSize: "100% 100%",
-                      WebkitMaskSize: "100% 100%",
-                      maskRepeat: "no-repeat",
-                      WebkitMaskRepeat: "no-repeat",
-                    }}
-                  >
-                    <Image
-                      src={canCoverGreen}
-                      alt=""
-                      priority
-                      className="h-full w-[98.27%] max-w-none object-fill select-none"
-                      draggable={false}
-                    />
-                  </div>
-                </div>
+                <NitroCan
+                  alt="Nitro Green energy drink can"
+                  priority
+                  className="z-10"
+                />
               </motion.div>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Bottom 3-Zone Bar matching Energy Drink 001 (z-[10]: clickable at rest, passes behind growing can during scroll) */}
+      {/* Bottom 3-Zone Bar (z-[10]: clickable at rest, passes behind growing can during scroll) */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}

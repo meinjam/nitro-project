@@ -1,5 +1,5 @@
-import { Navbar } from "@/components/Navbar";
-import { NitroScrollExperience } from "@/components/NitroScrollExperience";
+import { Navbar } from "@/components/navbar";
+import { NitroScrollExperience } from "@/components/nitro-scroll-experience";
 
 export default function HomePage() {
   return (

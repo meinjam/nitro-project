@@ -1,55 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import nitroLogo from "@/assets/nitro-logo.png";
-
-const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "Shop", href: "#shop" },
-  { label: "About", href: "#about" },
-  { label: "Gallery", href: "#about" },
-  { label: "Contact", href: "#shop" },
-];
+import { NAV_LINKS } from "@/data/navigation";
+import { useNavbarScrollState } from "@/hooks/use-navbar-scroll-state";
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const { scrolled, visible, show } = useNavbarScrollState();
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    let lastY = window.scrollY;
-    const THRESHOLD = 8;
-
-    const onScroll = () => {
-      const currentY = Math.max(0, window.scrollY);
-      const delta = currentY - lastY;
-
-      setScrolled(currentY > 24);
-
-      if (currentY <= 40) {
-        setVisible(true);
-        lastY = currentY;
-        return;
-      }
-
-      if (Math.abs(delta) < THRESHOLD) return;
-
-      if (delta > 0) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-      }
-
-      lastY = currentY;
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const isShown = visible || mobileOpen;
 
@@ -62,7 +23,7 @@ export function Navbar() {
           ? { duration: 0.38, ease: [0.22, 1, 0.36, 1] }
           : { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
       }
-      onFocus={() => setVisible(true)}
+      onFocus={show}
       className={`fixed top-0 left-0 right-0 z-50 will-change-transform transition-[background-color,border-color,backdrop-filter] duration-300 ${
         scrolled || mobileOpen
           ? "border-b border-white/[0.06] bg-black/80 backdrop-blur-md"
@@ -70,7 +31,6 @@ export function Navbar() {
       } ${isShown ? "pointer-events-auto" : "pointer-events-none"}`}
     >
       <div className="mx-auto flex h-[76px] sm:h-[108px] w-full max-w-[1920px] items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-[88px]">
-        {/* Brand Logo */}
         <a href="#home" aria-label="NiTRO Home" className="shrink-0">
           <Image
             src={nitroLogo}
@@ -80,7 +40,6 @@ export function Navbar() {
           />
         </a>
 
-        {/* Nav Links Container */}
         <nav
           aria-label="Primary"
           className="hidden lg:flex items-center justify-between w-full max-w-[848px] mx-8"
@@ -96,7 +55,6 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Right CTA Button + Mobile Toggle */}
         <div className="flex items-center gap-3">
           <a
             href="#shop"
@@ -117,7 +75,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Responsive Mobile & Tablet Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
