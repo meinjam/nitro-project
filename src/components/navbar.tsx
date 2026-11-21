@@ -30,7 +30,11 @@ export function Navbar() {
           : "border-b border-transparent bg-transparent"
       } ${isShown ? "pointer-events-auto" : "pointer-events-none"}`}
     >
-      <div className="mx-auto flex h-[76px] sm:h-[108px] w-full max-w-[1920px] items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-[88px]">
+      <div
+        className={`mx-auto flex w-full max-w-[1920px] items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-[88px] transition-[height] duration-300 ${
+          scrolled ? "h-[64px] sm:h-[76px]" : "h-[76px] sm:h-[108px]"
+        }`}
+      >
         <a href="#home" aria-label="NiTRO Home" className="shrink-0">
           <Image
             src={nitroLogo}
