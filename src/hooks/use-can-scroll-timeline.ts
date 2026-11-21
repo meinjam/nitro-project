@@ -4,14 +4,11 @@ import { type RefObject, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { CAN_WRAP_OFFSETS } from "@/components/can/nitro-can";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const CAN_ASPECT_RATIO = 340 / 896;
-
-/** Exact Figma 3-repeat vertical label pitch (100% label + 33% black cylinder back seam). */
-const ABOUT_WRAP_Y_PERCENT = -266; // 2× 360° upward cylinder revolutions (Hero -> About)
-const SHOP_WRAP_Y_PERCENT = -133; // 1× 360° opposite cylinder revolution (About -> Shop)
 
 export interface CanScrollRefs {
   mainRef: RefObject<HTMLElement | null>;
@@ -155,7 +152,7 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
             autoAlpha: 1,
             force3D: true,
           });
-          gsap.set(labelTrackEl, { yPercent: 0, force3D: true });
+          gsap.set(labelTrackEl, { yPercent: CAN_WRAP_OFFSETS.hero, force3D: true });
           if (heroShadowEl) gsap.set(heroShadowEl, { opacity: 1 });
           if (aboutShadowEl) gsap.set(aboutShadowEl, { opacity: 0 });
           if (floatEl) gsap.set(floatEl, { y: 0 });
@@ -208,7 +205,7 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
           // Horizontal scale-up (0°) + 2× 360° masked cylindrical label spin
           tl.to(canEl, { x: aboutBox.cx, y: aboutBox.cy, ease: "none", duration: phase1Dur }, 0);
           tl.to(canEl, { scale: aboutScale, rotation: 0, ease: "power1.inOut", duration: phase1Dur }, 0);
-          tl.to(labelTrackEl, { yPercent: ABOUT_WRAP_Y_PERCENT, ease: "power1.inOut", duration: phase1Dur }, 0);
+          tl.to(labelTrackEl, { yPercent: CAN_WRAP_OFFSETS.about, ease: "power1.inOut", duration: phase1Dur }, 0);
 
           if (heroShadowEl) {
             tl.to(heroShadowEl, { opacity: 0, ease: "power1.out", duration: phase1Dur * 0.65 }, 0);
@@ -221,7 +218,11 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
           // Shrink + rotate -90° upright + 1× 360° masked cylindrical label spin onto middle pedestal
           tl.to(canEl, { x: shopBox.cx, y: shopBox.cy, ease: "none", duration: phase2Dur }, phase1Dur);
           tl.to(canEl, { scale: shopScale, rotation: -90, ease: "power1.inOut", duration: phase2Dur }, phase1Dur);
-          tl.to(labelTrackEl, { yPercent: SHOP_WRAP_Y_PERCENT, ease: "power1.inOut", duration: phase2Dur }, phase1Dur);
+          tl.to(
+            labelTrackEl,
+            { yPercent: CAN_WRAP_OFFSETS.shop, ease: "power1.inOut", duration: phase2Dur },
+            phase1Dur
+          );
 
           if (aboutShadowEl) {
             tl.to(aboutShadowEl, { opacity: 0, ease: "power1.out", duration: phase2Dur * 0.38 }, phase1Dur);

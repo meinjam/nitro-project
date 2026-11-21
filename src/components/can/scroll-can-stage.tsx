@@ -62,7 +62,7 @@ export function ScrollCanStage({
             }}
           />
 
-          <NitroCan labelMode="triple-wrap" labelTrackRef={labelTrackRef} priority className="z-10" />
+          <NitroCan labelTrackRef={labelTrackRef} priority className="z-10" />
         </div>
       </div>
     </div>

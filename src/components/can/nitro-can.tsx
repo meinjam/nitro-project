@@ -3,16 +3,22 @@
 import type { CSSProperties, RefObject } from "react";
 import Image from "next/image";
 import canBaseHorizontal from "@/assets/can-base-horizontal.png";
-import canCoverGreen from "@/assets/can-cover-green.png";
+import canCoverGreenWrap from "@/assets/can-cover-green-wrap.png";
 import { cn } from "@/lib/utils";
+
+/** Exact Figma `Cover` Y-offsets (% of can height) for the 3-repeat 432.07%-tall wrap texture. */
+export const CAN_WRAP_OFFSETS = {
+  hero: -27.57,
+  about: -295.31,
+  shop: -163.54,
+} as const;
 
 interface NitroCanProps {
   alt?: string;
   orientation?: "horizontal" | "vertical";
   /** Optional Figma `Pack 1` HUE solid fill color (e.g. `#ff8000`, `#ff0000`, `#00b2ff`, `#0004ff`). */
   hueColor?: string;
-  /** `triple-wrap` mounts the 3-repeat 133%-pitch vertical track for 360° cylindrical scroll spins. */
-  labelMode?: "single" | "triple-wrap";
+  /** Attach a ref to animate the single 3-repeat wrap track's `yPercent` with GSAP. */
   labelTrackRef?: RefObject<HTMLDivElement | null>;
   priority?: boolean;
   className?: string;
@@ -30,18 +36,19 @@ const CAN_MASK_STYLE: CSSProperties = {
 /**
  * Single source of truth for the Figma layered NiTRO aluminum can composition:
  *  1. Metallic aluminum cylinder base with water droplets & silver top rim (`can-base-horizontal.png`)
- *  2. Masked `mix-blend-color-burn` label wrap (`can-cover-green.png`) covering 98.27% width
+ *  2. Masked `mix-blend-color-burn` single 3-repeat seamless wrap (`can-cover-green-wrap.png`, 432.07% height)
  *  3. Optional isolated `mix-blend-hue` solid tint matching Figma `Pack 1` flavor nodes
  */
 export function NitroCan({
   alt = "",
   orientation = "horizontal",
   hueColor,
-  labelMode = "single",
   labelTrackRef,
   priority = false,
   className = "",
 }: NitroCanProps) {
+  const staticOffset = orientation === "vertical" ? CAN_WRAP_OFFSETS.shop : CAN_WRAP_OFFSETS.hero;
+
   const canBody = (
     <div className="relative isolate h-full w-full">
       <Image
@@ -53,58 +60,25 @@ export function NitroCan({
       />
 
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden mix-blend-color-burn" style={CAN_MASK_STYLE}>
-        {labelMode === "triple-wrap" ? (
-          <div ref={labelTrackRef} className="relative h-full w-[98.27%] will-change-transform">
-            {/* Tile 1 (0%..100%): Hero resting label */}
-            <Image
-              src={canCoverGreen}
-              alt=""
-              priority={priority}
-              className="relative h-full w-full max-w-none object-fill select-none"
-              draggable={false}
+        <div
+          ref={labelTrackRef}
+          className="relative isolate h-full w-[98.27%] will-change-transform"
+          style={labelTrackRef ? undefined : { transform: `translate3d(0, ${staticOffset}%, 0)` }}
+        >
+          <Image
+            src={canCoverGreenWrap}
+            alt=""
+            priority={priority}
+            className="h-[432.07%] w-full max-w-none object-fill select-none"
+            draggable={false}
+          />
+          {hueColor && (
+            <div
+              className="pointer-events-none absolute top-0 left-0 h-[432.07%] w-full mix-blend-hue"
+              style={{ backgroundColor: hueColor }}
             />
-            {/* Black back-of-can seam 1 */}
-            <div className="absolute top-[99.5%] left-0 h-[34%] w-full bg-black" />
-            {/* Tile 2 (133%..233%): Mid-Hero spin & Shop resting label */}
-            <div className="absolute top-[133%] left-0 h-full w-full">
-              <Image
-                src={canCoverGreen}
-                alt=""
-                priority={priority}
-                className="h-full w-full max-w-none object-fill select-none"
-                draggable={false}
-              />
-            </div>
-            {/* Black back-of-can seam 2 */}
-            <div className="absolute top-[232.5%] left-0 h-[34%] w-full bg-black" />
-            {/* Tile 3 (266%..366%): About resting label */}
-            <div className="absolute top-[266%] left-0 h-full w-full">
-              <Image
-                src={canCoverGreen}
-                alt=""
-                priority={priority}
-                className="h-full w-full max-w-none object-fill select-none"
-                draggable={false}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="relative isolate h-full w-[98.27%]">
-            <Image
-              src={canCoverGreen}
-              alt=""
-              priority={priority}
-              className="h-full w-full max-w-none object-fill select-none"
-              draggable={false}
-            />
-            {hueColor && (
-              <div
-                className="pointer-events-none absolute inset-0 mix-blend-hue"
-                style={{ backgroundColor: hueColor }}
-              />
-            )}
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
@@ -114,7 +88,7 @@ export function NitroCan({
       <div
         role={alt ? "img" : undefined}
         aria-label={alt || undefined}
-        className={cn("relative aspect-340/896 w-full select-none", className)}
+        className={cn("relative aspect-[340/896] w-full select-none", className)}
       >
         {/* Rotate native 896×340 composition -90° so it fills 340×896 upright */}
         <div className="absolute top-1/2 left-1/2 h-[37.9464%] w-[263.5294%] -translate-x-1/2 -translate-y-1/2 -rotate-90">

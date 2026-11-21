@@ -11,7 +11,7 @@ Responsive **Next.js (App Router)** landing page with a bidirectional, scroll-sc
   - **Accessible by Default**: Respects `prefers-reduced-motion: reduce` via `gsap.matchMedia()` and Lenis, gracefully rendering static layered cans in each section.
 - **Butter-Smooth Scrolling (`Lenis`)**: Synchronized directly to `gsap.ticker` (`autoRaf: false`, `lagSmoothing(0)`, `scrub: true`) for 60/120fps inertia with zero double-smoothing lag.
 - **Smart Auto-Hide Navbar**: Stays pinned at the top, hides smoothly when scrolling down, and glides back in immediately on reverse (upward) scroll or keyboard focus.
-- **Single-Source Layered Figma Cans (`<NitroCan />`)**: All 5 product flavors (`NiTRO ENG`, `NiTRO RED`, `NiTRO GREEN`, `NiTRO SKY`, `NiTRO BLUE`) are composed live from `can-base-horizontal.png` + `can-cover-green.png` using `mix-blend-color-burn` and Figma's exact `mix-blend-hue` flavor fills (`#ff8000`, `#ff0000`, `#00b2ff`, `#0004ff`).
+- **Single-Source Layered Figma Cans (`<NitroCan />`)**: All 5 product flavors (`NiTRO ENG`, `NiTRO RED`, `NiTRO GREEN`, `NiTRO SKY`, `NiTRO BLUE`) are composed live from `can-base-horizontal.png` + the seamless 3-repeat `can-cover-green-wrap.png` texture using `mix-blend-color-burn` and Figma's exact `mix-blend-hue` flavor fills (`#ff8000`, `#ff0000`, `#00b2ff`, `#0004ff`).
 
 ## Project Structure
 
