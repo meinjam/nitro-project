@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import canGreenHorizontal from "@/assets/can-green-horizontal.png";
+import canBaseHorizontal from "@/assets/can-base-horizontal.png";
+import canCoverGreen from "@/assets/can-cover-green.png";
+import canHeroShadow from "@/assets/can-hero-shadow.png";
 import nitroWordmark from "@/assets/nitro-wordmark.png";
 import { SocialIcons } from "./SocialIcons";
 
@@ -14,7 +16,7 @@ export function HeroSection() {
     >
       <div className="h-2 sm:h-4" aria-hidden="true" />
 
-      {/* Centerpiece: Giant NiTRO Wordmark + Overlapping Horizontal Can */}
+      {/* Centerpiece: Giant NiTRO Wordmark + Figma Layered Can (1:40) */}
       <div className="relative mx-auto my-auto flex w-full max-w-[1920px] items-center justify-center px-4 sm:px-10 lg:px-14 xl:px-[88px] py-8">
         <h1 className="sr-only">NiTRO Energy Drink</h1>
 
@@ -33,6 +35,7 @@ export function HeroSection() {
           />
         </motion.div>
 
+        {/* Figma Node 1:40 (Can): Ellipse 1 shadow + Base Can (1:42) + Masked Cover (1:43 -> 1:44 + 1:45) */}
         <motion.div
           initial={{ opacity: 0, x: -36, scale: 0.94 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -42,20 +45,51 @@ export function HeroSection() {
           <motion.div
             animate={{ y: [-4, 4, -4] }}
             transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-[65%] sm:w-[56%] lg:w-[51.3%] max-w-[896px]"
+            className="relative aspect-[896/340] w-[65%] sm:w-[56%] lg:w-[51.3%] max-w-[896px]"
           >
-            {/* Cast shadow ellipse matching Figma Ellipse 1 */}
-            <div
-              className="absolute -bottom-[9%] left-[5%] right-[4%] h-[22%] rounded-full bg-black/85 blur-2xl"
-              aria-hidden="true"
-            />
+            {/* Child 1 (1:41): Ellipse 1 Shadow */}
             <Image
-              src={canGreenHorizontal}
-              alt="Nitro Green energy drink can"
+              src={canHeroShadow}
+              alt=""
+              aria-hidden="true"
               priority
-              className="relative z-10 w-full h-auto object-contain drop-shadow-[0_24px_34px_rgba(0,0,0,0.85)]"
+              className="pointer-events-none absolute -left-[5.6%] -bottom-[27.4%] z-0 w-[121.65%] max-w-none h-auto select-none"
               draggable={false}
             />
+
+            {/* Isolated Can Body Composition (1:42 + 1:43 Mask Group) */}
+            <div className="relative z-10 isolate h-full w-full">
+              {/* Child 2 (1:42): Metallic Aluminum Can Base with Water Droplets */}
+              <Image
+                src={canBaseHorizontal}
+                alt="Nitro Green energy drink can"
+                priority
+                className="h-full w-full object-fill select-none"
+                draggable={false}
+              />
+
+              {/* Child 3 (1:43): Mask group (1:44 Can silhouette + 1:45 Cover wrap) */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 overflow-hidden mix-blend-color-burn"
+                style={{
+                  maskImage: `url(${canBaseHorizontal.src})`,
+                  WebkitMaskImage: `url(${canBaseHorizontal.src})`,
+                  maskSize: "100% 100%",
+                  WebkitMaskSize: "100% 100%",
+                  maskRepeat: "no-repeat",
+                  WebkitMaskRepeat: "no-repeat",
+                }}
+              >
+                <Image
+                  src={canCoverGreen}
+                  alt=""
+                  priority
+                  className="h-full w-[98.27%] max-w-none object-fill select-none"
+                  draggable={false}
+                />
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
