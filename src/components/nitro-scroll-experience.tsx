@@ -53,10 +53,7 @@ export function NitroScrollExperience() {
 
   return (
     <main ref={mainRef} className="relative overflow-x-clip">
-      <HeroSection
-        canAnchorRef={heroCanAnchorRef}
-        hideStaticCan={isAnimatedActive}
-      />
+      <HeroSection canAnchorRef={heroCanAnchorRef} hideStaticCan={isAnimatedActive} />
       <AboutSection
         sectionRef={aboutSectionRef}
         desktopCanAnchorRef={aboutDesktopCanAnchorRef}

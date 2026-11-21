@@ -11,7 +11,7 @@ const CAN_ASPECT_RATIO = 340 / 896;
 
 /** Exact Figma 3-repeat vertical label pitch (100% label + 33% black cylinder back seam). */
 const ABOUT_WRAP_Y_PERCENT = -266; // 2× 360° upward cylinder revolutions (Hero -> About)
-const SHOP_WRAP_Y_PERCENT = -133;  // 1× 360° opposite cylinder revolution (About -> Shop)
+const SHOP_WRAP_Y_PERCENT = -133; // 1× 360° opposite cylinder revolution (About -> Shop)
 
 export interface CanScrollRefs {
   mainRef: RefObject<HTMLElement | null>;
@@ -31,10 +31,7 @@ export interface CanScrollRefs {
   aboutShadowRef: RefObject<HTMLDivElement | null>;
 }
 
-function pickVisibleElement(
-  primary: HTMLElement | null,
-  fallback: HTMLElement | null
-): HTMLElement | null {
+function pickVisibleElement(primary: HTMLElement | null, fallback: HTMLElement | null): HTMLElement | null {
   for (const el of [primary, fallback]) {
     if (!el) continue;
     const rect = el.getBoundingClientRect();
@@ -128,10 +125,8 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
           const aboutBox = measureRelativeTo(aboutAnchor, mainRect);
           const shopBox = measureRelativeTo(shopAnchor, mainRect);
 
-          const aboutSecTop =
-            aboutSection.getBoundingClientRect().top - mainRect.top;
-          const shopSecTop =
-            shopSection.getBoundingClientRect().top - mainRect.top;
+          const aboutSecTop = aboutSection.getBoundingClientRect().top - mainRect.top;
+          const shopSecTop = shopSection.getBoundingClientRect().top - mainRect.top;
 
           // Base size matches largest visual span across Hero, About, and upright Shop so scale <= 1 everywhere
           const baseW = Math.max(aboutBox.width, heroBox.width, shopBox.height);
@@ -142,15 +137,9 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
           // At -90deg rotation, visual height equals baseW * scale
           const shopScale = shopBox.height / baseW;
 
-          const maxScroll = Math.max(
-            2,
-            document.documentElement.scrollHeight - window.innerHeight
-          );
+          const maxScroll = Math.max(2, document.documentElement.scrollHeight - window.innerHeight);
           const endScroll = Math.max(2, Math.min(maxScroll, shopSecTop));
-          const aboutRatio = Math.min(
-            0.85,
-            Math.max(0.15, aboutSecTop / endScroll)
-          );
+          const aboutRatio = Math.min(0.85, Math.max(0.15, aboutSecTop / endScroll));
           const phase1Dur = aboutRatio;
           const phase2Dur = 1 - aboutRatio;
 
@@ -182,10 +171,9 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
             });
           }
 
-          const pedestals = [
-            refs.shopDesktopPedestalRef.current,
-            refs.shopMobilePedestalRef.current,
-          ].filter(Boolean) as HTMLElement[];
+          const pedestals = [refs.shopDesktopPedestalRef.current, refs.shopMobilePedestalRef.current].filter(
+            Boolean
+          ) as HTMLElement[];
 
           if (pedestals.length > 0) {
             gsap.set(pedestals, { opacity: 0.45, scale: 0.92 });
@@ -218,61 +206,25 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
 
           // Phase 1: Hero (#home) -> About (#about)
           // Horizontal scale-up (0°) + 2× 360° masked cylindrical label spin
-          tl.to(
-            canEl,
-            { x: aboutBox.cx, y: aboutBox.cy, ease: "none", duration: phase1Dur },
-            0
-          );
-          tl.to(
-            canEl,
-            { scale: aboutScale, rotation: 0, ease: "power1.inOut", duration: phase1Dur },
-            0
-          );
-          tl.to(
-            labelTrackEl,
-            { yPercent: ABOUT_WRAP_Y_PERCENT, ease: "power1.inOut", duration: phase1Dur },
-            0
-          );
+          tl.to(canEl, { x: aboutBox.cx, y: aboutBox.cy, ease: "none", duration: phase1Dur }, 0);
+          tl.to(canEl, { scale: aboutScale, rotation: 0, ease: "power1.inOut", duration: phase1Dur }, 0);
+          tl.to(labelTrackEl, { yPercent: ABOUT_WRAP_Y_PERCENT, ease: "power1.inOut", duration: phase1Dur }, 0);
 
           if (heroShadowEl) {
-            tl.to(
-              heroShadowEl,
-              { opacity: 0, ease: "power1.out", duration: phase1Dur * 0.65 },
-              0
-            );
+            tl.to(heroShadowEl, { opacity: 0, ease: "power1.out", duration: phase1Dur * 0.65 }, 0);
           }
           if (aboutShadowEl) {
-            tl.to(
-              aboutShadowEl,
-              { opacity: 1, ease: "power1.inOut", duration: phase1Dur * 0.7 },
-              phase1Dur * 0.3
-            );
+            tl.to(aboutShadowEl, { opacity: 1, ease: "power1.inOut", duration: phase1Dur * 0.7 }, phase1Dur * 0.3);
           }
 
           // Phase 2: About (#about) -> Shop (#shop)
           // Shrink + rotate -90° upright + 1× 360° masked cylindrical label spin onto middle pedestal
-          tl.to(
-            canEl,
-            { x: shopBox.cx, y: shopBox.cy, ease: "none", duration: phase2Dur },
-            phase1Dur
-          );
-          tl.to(
-            canEl,
-            { scale: shopScale, rotation: -90, ease: "power1.inOut", duration: phase2Dur },
-            phase1Dur
-          );
-          tl.to(
-            labelTrackEl,
-            { yPercent: SHOP_WRAP_Y_PERCENT, ease: "power1.inOut", duration: phase2Dur },
-            phase1Dur
-          );
+          tl.to(canEl, { x: shopBox.cx, y: shopBox.cy, ease: "none", duration: phase2Dur }, phase1Dur);
+          tl.to(canEl, { scale: shopScale, rotation: -90, ease: "power1.inOut", duration: phase2Dur }, phase1Dur);
+          tl.to(labelTrackEl, { yPercent: SHOP_WRAP_Y_PERCENT, ease: "power1.inOut", duration: phase2Dur }, phase1Dur);
 
           if (aboutShadowEl) {
-            tl.to(
-              aboutShadowEl,
-              { opacity: 0, ease: "power1.out", duration: phase2Dur * 0.38 },
-              phase1Dur
-            );
+            tl.to(aboutShadowEl, { opacity: 0, ease: "power1.out", duration: phase2Dur * 0.38 }, phase1Dur);
           }
           if (pedestals.length > 0) {
             tl.to(

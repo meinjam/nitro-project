@@ -14,10 +14,7 @@ interface HeroSectionProps {
   hideStaticCan?: boolean;
 }
 
-export function HeroSection({
-  canAnchorRef,
-  hideStaticCan = false,
-}: HeroSectionProps) {
+export function HeroSection({ canAnchorRef, hideStaticCan = false }: HeroSectionProps) {
   return (
     <section
       id="home"
@@ -26,7 +23,7 @@ export function HeroSection({
       <div className="h-2 sm:h-4" aria-hidden="true" />
 
       {/* Centerpiece: Giant NiTRO Wordmark + Untransformed Can Measurement Anchor */}
-      <div className="nitro-container relative my-auto flex items-center justify-center px-4 sm:px-10 lg:px-14 xl:px-22 py-8">
+      <div className="relative nitro-container my-auto flex items-center justify-center px-4 py-8 sm:px-10 lg:px-14 xl:px-22">
         <h1 className="sr-only">NiTRO Energy Drink</h1>
 
         <motion.div
@@ -39,16 +36,13 @@ export function HeroSection({
             src={nitroWordmark}
             alt="NiTRO"
             priority
-            className="mx-auto w-full h-auto object-contain pointer-events-none"
+            className="pointer-events-none mx-auto h-auto w-full object-contain"
             draggable={false}
           />
         </motion.div>
 
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div
-            ref={canAnchorRef}
-            className="relative aspect-896/340 w-[65%] sm:w-[56%] lg:w-[51.3%] max-w-4xl"
-          >
+          <div ref={canAnchorRef} className="relative aspect-896/340 w-[65%] max-w-4xl sm:w-[56%] lg:w-[51.3%]">
             {/* Static / reduced-motion fallback can (hidden while ScrollCanStage is active) */}
             <motion.div
               initial={{ opacity: 0, x: -36, scale: 0.94 }}
@@ -70,14 +64,10 @@ export function HeroSection({
                   alt=""
                   aria-hidden="true"
                   priority
-                  className="pointer-events-none absolute left-[-5.6%] bottom-[-27.4%] z-0 w-[121.65%] max-w-none h-auto select-none"
+                  className="pointer-events-none absolute bottom-[-27.4%] left-[-5.6%] z-0 h-auto w-[121.65%] max-w-none select-none"
                   draggable={false}
                 />
-                <NitroCan
-                  alt="Nitro Green energy drink can"
-                  priority
-                  className="z-10"
-                />
+                <NitroCan alt="Nitro Green energy drink can" priority className="z-10" />
               </motion.div>
             </motion.div>
           </div>
@@ -89,24 +79,23 @@ export function HeroSection({
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.65, delay: 0.2 }}
-        className="nitro-container relative z-10 px-5 sm:px-10 lg:px-14 xl:px-22"
+        className="relative z-10 nitro-container px-5 sm:px-10 lg:px-14 xl:px-22"
       >
         <div className="flex flex-col items-center gap-7 text-center lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-end lg:gap-8 lg:text-left">
-          <p className="max-w-123.75 text-[14px] sm:text-[15px] xl:text-[16px] font-normal uppercase leading-6 text-white">
-            Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac.
+          <p className="max-w-123.75 text-[14px] leading-6 font-normal text-white uppercase sm:text-[15px] xl:text-[16px]">
+            Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8.25">
             <a
               href="#shop"
-              className="inline-flex h-11 w-35.5 sm:w-38.25 items-center justify-center bg-white text-[16px] font-medium leading-6 text-black transition-colors duration-200 hover:bg-nitro-yellow"
+              className="inline-flex h-11 w-35.5 items-center justify-center bg-white text-[16px] leading-6 font-medium text-black transition-colors duration-200 hover:bg-nitro-yellow sm:w-38.25"
             >
               Buy Now
             </a>
             <a
               href="#about"
-              className="inline-flex h-11 w-35.5 sm:w-39.75 items-center justify-center border border-white text-[16px] font-medium leading-6 text-white transition-colors duration-200 hover:border-nitro-yellow hover:text-nitro-yellow"
+              className="inline-flex h-11 w-35.5 items-center justify-center border border-white text-[16px] leading-6 font-medium text-white transition-colors duration-200 hover:border-nitro-yellow hover:text-nitro-yellow sm:w-39.75"
             >
               More info
             </a>

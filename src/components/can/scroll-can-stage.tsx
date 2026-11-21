@@ -30,10 +30,7 @@ export function ScrollCanStage({
   return (
     <div
       aria-hidden="true"
-      className={cn(
-        "pointer-events-none absolute inset-0 select-none",
-        visible ? "opacity-100" : "opacity-0"
-      )}
+      className={cn("pointer-events-none absolute inset-0 select-none", visible ? "opacity-100" : "opacity-0")}
     >
       <div
         ref={canStageRef}
@@ -44,7 +41,7 @@ export function ScrollCanStage({
           {/* Hero floor shadow (fades out during Phase 1: Hero -> About) */}
           <div
             ref={heroShadowRef}
-            className="pointer-events-none absolute left-[-5.6%] bottom-[-27.4%] z-0 w-[121.65%] will-change-transform"
+            className="pointer-events-none absolute bottom-[-27.4%] left-[-5.6%] z-0 w-[121.65%] will-change-transform"
           >
             <Image
               src={canHeroShadow}
@@ -58,19 +55,14 @@ export function ScrollCanStage({
           {/* About deep ground shadow: pure radial gradient (zero live blur filter for 60/120fps scroll) */}
           <div
             ref={aboutShadowRef}
-            className="pointer-events-none absolute bottom-[-24%] left-[-4%] right-[-4%] z-0 h-[56%]"
+            className="pointer-events-none absolute right-[-4%] bottom-[-24%] left-[-4%] z-0 h-[56%]"
             style={{
               background:
                 "radial-gradient(ellipse 50% 48% at 50% 50%, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.62) 48%, rgba(0, 0, 0, 0) 100%)",
             }}
           />
 
-          <NitroCan
-            labelMode="triple-wrap"
-            labelTrackRef={labelTrackRef}
-            priority
-            className="z-10"
-          />
+          <NitroCan labelMode="triple-wrap" labelTrackRef={labelTrackRef} priority className="z-10" />
         </div>
       </div>
     </div>

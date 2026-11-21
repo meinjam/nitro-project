@@ -10,7 +10,7 @@ export function CanRightShadow({ uid }: { uid: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      className="pointer-events-none absolute top-1/2 right-[-40%] z-8 w-[77.5%] h-[130.8%] -translate-y-1/2"
+      className="pointer-events-none absolute top-1/2 right-[-40%] z-8 h-[130.8%] w-[77.5%] -translate-y-1/2"
     >
       <g filter={`url(#${filterId})`}>
         <ellipse cx="64.9174" cy="288.939" rx="21.8602" ry="245.882" fill="black" />
@@ -26,16 +26,8 @@ export function CanRightShadow({ uid }: { uid: string }) {
           colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="BackgroundImageFix"
-            result="shape"
-          />
-          <feGaussianBlur
-            stdDeviation="21.5286"
-            result="effect1_foregroundBlur_1_236"
-          />
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feGaussianBlur stdDeviation="21.5286" result="effect1_foregroundBlur_1_236" />
         </filter>
       </defs>
     </svg>
@@ -49,10 +41,7 @@ export function FlankingCanShadow({ className }: { className: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      className={cn(
-        "pointer-events-none absolute left-1/2 z-5 h-auto -translate-x-1/2",
-        className
-      )}
+      className={cn("pointer-events-none absolute left-1/2 z-5 h-auto -translate-x-1/2", className)}
     >
       <ellipse cx="108.5" cy="16.3774" rx="108.5" ry="16.3774" fill="#212121" />
     </svg>
@@ -72,15 +61,10 @@ export function NitroGreenPedestal({
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute left-1/2 bottom-[-6.9%] z-5 w-[126.65%] -translate-x-1/2"
+      className="pointer-events-none absolute bottom-[-6.9%] left-1/2 z-5 w-[126.65%] -translate-x-1/2"
     >
       <div ref={pedestalRef} className="w-full will-change-transform">
-        <svg
-          viewBox="0 0 325 100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-auto w-full"
-        >
+        <svg viewBox="0 0 325 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-auto w-full">
           <g filter={`url(#${filterId})`}>
             <ellipse cx="162.4" cy="45.9" rx="132.5" ry="20" fill="#828282" />
             <mask id={maskId} fill="white">
@@ -116,21 +100,9 @@ export function NitroGreenPedestal({
               <feOffset dy="4" />
               <feGaussianBlur stdDeviation="14.95" />
               <feComposite in2="hardAlpha" operator="out" />
-              <feColorMatrix
-                type="matrix"
-                values="0 0 0 0 0.878431 0 0 0 0 0.901961 0 0 0 0 0 0 0 0 0.36 0"
-              />
-              <feBlend
-                mode="normal"
-                in2="BackgroundImageFix"
-                result="effect1_dropShadow_1_176"
-              />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="effect1_dropShadow_1_176"
-                result="shape"
-              />
+              <feColorMatrix type="matrix" values="0 0 0 0 0.878431 0 0 0 0 0.901961 0 0 0 0 0 0 0 0 0.36 0" />
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_176" />
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_176" result="shape" />
             </filter>
           </defs>
         </svg>

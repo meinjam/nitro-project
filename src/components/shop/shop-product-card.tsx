@@ -5,11 +5,7 @@ import Image from "next/image";
 import { NitroCan } from "@/components/can/nitro-can";
 import type { NitroProduct } from "@/data/products";
 import { cn } from "@/lib/utils";
-import {
-  CanRightShadow,
-  FlankingCanShadow,
-  NitroGreenPedestal,
-} from "./shop-shadows";
+import { CanRightShadow, FlankingCanShadow, NitroGreenPedestal } from "./shop-shadows";
 
 interface ShopProductCardProps {
   product: NitroProduct;
@@ -39,11 +35,7 @@ export function ShopProductCard({
   return (
     <div
       tabIndex={isCenter ? 0 : undefined}
-      aria-label={
-        isCenter
-          ? `${product.name}, ${product.subtitle}, ${product.price}`
-          : undefined
-      }
+      aria-label={isCenter ? `${product.name}, ${product.subtitle}, ${product.price}` : undefined}
       className={cn(
         "flex flex-col items-center select-none",
         isCenter &&
@@ -65,16 +57,11 @@ export function ShopProductCard({
             <NitroCan
               alt={product.name}
               orientation="vertical"
-              className={cn(hideStaticCan && "opacity-0 invisible")}
+              className={cn(hideStaticCan && "invisible opacity-0")}
             />
           </div>
         ) : (
-          <NitroCan
-            alt={product.name}
-            orientation="vertical"
-            hueColor={product.hueColor}
-            className="z-10"
-          />
+          <NitroCan alt={product.name} orientation="vertical" hueColor={product.hueColor} className="z-10" />
         )}
       </div>
 
@@ -82,13 +69,7 @@ export function ShopProductCard({
       <div
         className={cn(
           "relative z-10 flex flex-col items-center text-center",
-          isDesktop
-            ? isCenter
-              ? "mt-8 lg:mt-10 xl:mt-12"
-              : "mt-7 lg:mt-9 xl:mt-11.5"
-            : isCenter
-              ? "mt-8"
-              : "mt-6"
+          isDesktop ? (isCenter ? "mt-8 lg:mt-10 xl:mt-12" : "mt-7 lg:mt-9 xl:mt-11.5") : isCenter ? "mt-8" : "mt-6"
         )}
       >
         <h3 className="sr-only">{product.name}</h3>
@@ -97,11 +78,7 @@ export function ShopProductCard({
           alt={product.name}
           className={cn(
             "w-auto object-contain",
-            isDesktop
-              ? "h-3.75 lg:h-4.5 xl:h-5.25"
-              : isCenter
-                ? "h-4.75"
-                : "h-3.75"
+            isDesktop ? "h-3.75 lg:h-4.5 xl:h-5.25" : isCenter ? "h-4.75" : "h-3.75"
           )}
           draggable={false}
         />
@@ -109,7 +86,7 @@ export function ShopProductCard({
           className={cn(
             "text-white/[0.58]",
             isDesktop
-              ? "mt-1.5 text-[13px] lg:text-[15px] xl:text-[17px] font-normal leading-normal whitespace-nowrap"
+              ? "mt-1.5 text-[13px] leading-normal font-normal whitespace-nowrap lg:text-[15px] xl:text-[17px]"
               : isCenter
                 ? "mt-1.5 text-[16px]"
                 : "mt-1 text-[14px]"
@@ -121,7 +98,7 @@ export function ShopProductCard({
           className={cn(
             "mt-0.5 font-extrabold text-white",
             isDesktop
-              ? "text-[18px] lg:text-[21px] xl:text-[24px] leading-normal whitespace-nowrap"
+              ? "text-[18px] leading-normal whitespace-nowrap lg:text-[21px] xl:text-[24px]"
               : isCenter
                 ? "text-[22px]"
                 : "text-[18px]"

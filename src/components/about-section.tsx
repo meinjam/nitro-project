@@ -37,7 +37,7 @@ export function AboutSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: "some" }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-5 max-h-[44svh] sm:max-h-[46svh] lg:max-h-none lg:h-full w-full overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px]"
+              className="relative z-5 max-h-[44svh] w-full overflow-hidden rounded-[28px] sm:max-h-[46svh] sm:rounded-[36px] lg:h-full lg:max-h-none lg:rounded-[40px]"
             >
               <Image
                 src={heroSoccer}
@@ -49,34 +49,26 @@ export function AboutSection({
             {/* Mobile/Tablet Horizontal Can Anchor (untransformed for exact GSAP measurement) */}
             <div
               ref={mobileCanAnchorRef}
-              className="relative z-10 -mt-12 sm:-mt-14 mx-auto aspect-896/340 w-[92%] sm:w-[82%] lg:hidden"
+              className="relative z-10 mx-auto -mt-12 aspect-896/340 w-[92%] sm:-mt-14 sm:w-[82%] lg:hidden"
             >
-              {!hideStaticCan && (
-                <NitroCan alt="Nitro Green oversized horizontal can" />
-              )}
+              {!hideStaticCan && <NitroCan alt="Nitro Green oversized horizontal can" />}
             </div>
           </div>
 
           {/* Desktop Oversized Horizontal Can Anchor (z-[10]: over photo z-[5], behind tagline z-[25]) */}
-          <div className="hidden lg:flex pointer-events-none absolute inset-y-0 left-[8%] right-[9%] z-10 items-center justify-center">
-            <div
-              ref={desktopCanAnchorRef}
-              className="relative aspect-896/340 w-full max-w-372"
-            >
+          <div className="pointer-events-none absolute inset-y-0 right-[9%] left-[8%] z-10 hidden items-center justify-center lg:flex">
+            <div ref={desktopCanAnchorRef} className="relative aspect-896/340 w-full max-w-372">
               {!hideStaticCan && (
                 <>
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute bottom-[-24%] left-[-4%] right-[-4%] z-0 h-[56%]"
+                    className="pointer-events-none absolute right-[-4%] bottom-[-24%] left-[-4%] z-0 h-[56%]"
                     style={{
                       background:
                         "radial-gradient(ellipse 50% 48% at 50% 50%, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.62) 48%, rgba(0, 0, 0, 0) 100%)",
                     }}
                   />
-                  <NitroCan
-                    alt="Nitro Green oversized horizontal can"
-                    className="z-10"
-                  />
+                  <NitroCan alt="Nitro Green oversized horizontal can" className="z-10" />
                 </>
               )}
             </div>
@@ -88,12 +80,12 @@ export function AboutSection({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-25 w-[68%] max-w-65 sm:max-w-75 lg:absolute lg:right-[1%] lg:top-1/2 lg:-translate-y-1/2 lg:w-[33%] lg:max-w-148.5"
+            className="relative z-25 w-[68%] max-w-65 sm:max-w-75 lg:absolute lg:top-1/2 lg:right-[1%] lg:w-[33%] lg:max-w-148.5 lg:-translate-y-1/2"
           >
             <Image
               src={since2002Producing}
               alt="Since 2002 producing"
-              className="w-full h-auto object-contain"
+              className="h-auto w-full object-contain"
               draggable={false}
             />
           </motion.div>

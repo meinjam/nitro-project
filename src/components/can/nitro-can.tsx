@@ -52,16 +52,9 @@ export function NitroCan({
         draggable={false}
       />
 
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 overflow-hidden mix-blend-color-burn"
-        style={CAN_MASK_STYLE}
-      >
+      <div aria-hidden="true" className="absolute inset-0 overflow-hidden mix-blend-color-burn" style={CAN_MASK_STYLE}>
         {labelMode === "triple-wrap" ? (
-          <div
-            ref={labelTrackRef}
-            className="relative h-full w-[98.27%] will-change-transform"
-          >
+          <div ref={labelTrackRef} className="relative h-full w-[98.27%] will-change-transform">
             {/* Tile 1 (0%..100%): Hero resting label */}
             <Image
               src={canCoverGreen}
@@ -71,9 +64,9 @@ export function NitroCan({
               draggable={false}
             />
             {/* Black back-of-can seam 1 */}
-            <div className="absolute left-0 top-[99.5%] h-[34%] w-full bg-black" />
+            <div className="absolute top-[99.5%] left-0 h-[34%] w-full bg-black" />
             {/* Tile 2 (133%..233%): Mid-Hero spin & Shop resting label */}
-            <div className="absolute left-0 top-[133%] h-full w-full">
+            <div className="absolute top-[133%] left-0 h-full w-full">
               <Image
                 src={canCoverGreen}
                 alt=""
@@ -83,9 +76,9 @@ export function NitroCan({
               />
             </div>
             {/* Black back-of-can seam 2 */}
-            <div className="absolute left-0 top-[232.5%] h-[34%] w-full bg-black" />
+            <div className="absolute top-[232.5%] left-0 h-[34%] w-full bg-black" />
             {/* Tile 3 (266%..366%): About resting label */}
-            <div className="absolute left-0 top-[266%] h-full w-full">
+            <div className="absolute top-[266%] left-0 h-full w-full">
               <Image
                 src={canCoverGreen}
                 alt=""
@@ -131,9 +124,5 @@ export function NitroCan({
     );
   }
 
-  return (
-    <div className={cn("relative h-full w-full select-none", className)}>
-      {canBody}
-    </div>
-  );
+  return <div className={cn("relative h-full w-full select-none", className)}>{canBody}</div>;
 }

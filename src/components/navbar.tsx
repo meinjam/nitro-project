@@ -23,14 +23,10 @@ export function Navbar() {
     <motion.header
       initial={false}
       animate={isShown ? { y: "0%", opacity: 1 } : { y: "-100%", opacity: 0 }}
-      transition={
-        isShown
-          ? { duration: 0.38, ease: [0.22, 1, 0.36, 1] }
-          : { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
-      }
+      transition={isShown ? { duration: 0.38, ease: [0.22, 1, 0.36, 1] } : { duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
       onFocus={show}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 will-change-transform transition-[background-color,border-color,backdrop-filter] duration-300",
+        "fixed top-0 right-0 left-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 will-change-transform",
         scrolled || mobileOpen
           ? "border-b border-white/6 bg-black/80 backdrop-blur-md"
           : "border-b border-transparent bg-transparent",
@@ -39,28 +35,20 @@ export function Navbar() {
     >
       <div
         className={cn(
-          "nitro-container flex items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-22 transition-[height] duration-300",
+          "nitro-container flex items-center justify-between px-5 transition-[height] duration-300 sm:px-10 lg:px-14 xl:px-22",
           scrolled ? "h-16 sm:h-19" : "h-19 sm:h-27"
         )}
       >
         <a href="#home" aria-label="NiTRO Home" className="shrink-0">
-          <Image
-            src={nitroLogo}
-            alt="NiTRO"
-            priority
-            className="h-4.5 sm:h-5.5 w-auto object-contain"
-          />
+          <Image src={nitroLogo} alt="NiTRO" priority className="h-4.5 w-auto object-contain sm:h-5.5" />
         </a>
 
-        <nav
-          aria-label="Primary"
-          className="hidden lg:flex items-center justify-between w-full max-w-212 mx-8"
-        >
+        <nav aria-label="Primary" className="mx-8 hidden w-full max-w-212 items-center justify-between lg:flex">
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-[16px] font-normal leading-6 text-white transition-colors duration-200 hover:text-nitro-yellow"
+              className="text-[16px] leading-6 font-normal text-white transition-colors duration-200 hover:text-nitro-yellow"
             >
               {link.label}
             </a>
@@ -70,7 +58,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <a
             href="#shop"
-            className="hidden sm:inline-flex h-11 w-38.25 items-center justify-center bg-nitro-yellow text-[16px] font-medium leading-6 text-black transition-opacity duration-200 hover:opacity-90"
+            className="hidden h-11 w-38.25 items-center justify-center bg-nitro-yellow text-[16px] leading-6 font-medium text-black transition-opacity duration-200 hover:opacity-90 sm:inline-flex"
           >
             Buy Now
           </a>
@@ -83,7 +71,7 @@ export function Navbar() {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             className={cn(
-              "inline-flex lg:hidden h-10 w-10 items-center justify-center border transition-colors duration-200 cursor-pointer",
+              "inline-flex h-10 w-10 cursor-pointer items-center justify-center border transition-colors duration-200 lg:hidden",
               mobileOpen
                 ? "border-nitro-yellow text-nitro-yellow"
                 : "border-white/25 text-white hover:border-nitro-yellow hover:text-nitro-yellow"
@@ -92,33 +80,21 @@ export function Navbar() {
             <span className="relative h-3.5 w-4.5" aria-hidden="true">
               <motion.span
                 initial={false}
-                animate={
-                  mobileOpen
-                    ? { y: 6.125, rotate: 45 }
-                    : { y: 0, rotate: 0 }
-                }
+                animate={mobileOpen ? { y: 6.125, rotate: 45 } : { y: 0, rotate: 0 }}
                 transition={TOGGLE_TRANSITION}
-                className="absolute left-0 top-0 h-[1.75px] w-full origin-center rounded-full bg-current"
+                className="absolute top-0 left-0 h-[1.75px] w-full origin-center rounded-full bg-current"
               />
               <motion.span
                 initial={false}
-                animate={
-                  mobileOpen
-                    ? { opacity: 0, scaleX: 0 }
-                    : { opacity: 1, scaleX: 1 }
-                }
+                animate={mobileOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
                 transition={TOGGLE_TRANSITION}
-                className="absolute left-0 top-[6.125px] h-[1.75px] w-full origin-center rounded-full bg-current"
+                className="absolute top-[6.125px] left-0 h-[1.75px] w-full origin-center rounded-full bg-current"
               />
               <motion.span
                 initial={false}
-                animate={
-                  mobileOpen
-                    ? { y: -6.125, rotate: -45 }
-                    : { y: 0, rotate: 0 }
-                }
+                animate={mobileOpen ? { y: -6.125, rotate: -45 } : { y: 0, rotate: 0 }}
                 transition={TOGGLE_TRANSITION}
-                className="absolute left-0 bottom-0 h-[1.75px] w-full origin-center rounded-full bg-current"
+                className="absolute bottom-0 left-0 h-[1.75px] w-full origin-center rounded-full bg-current"
               />
             </span>
           </motion.button>
@@ -148,7 +124,7 @@ export function Navbar() {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   onClick={() => setMobileOpen(false)}
-                  className="border-b border-white/10 py-3 text-[17px] text-white transition-colors hover:text-nitro-yellow last:border-b-0"
+                  className="border-b border-white/10 py-3 text-[17px] text-white transition-colors last:border-b-0 hover:text-nitro-yellow"
                 >
                   {link.label}
                 </motion.a>

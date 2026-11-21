@@ -26,9 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={outfit.variable}>
-      <body className="bg-black text-white antialiased selection:bg-nitro-yellow selection:text-black">
-        {children}
-      </body>
+      <body className="bg-black text-white antialiased selection:bg-nitro-yellow selection:text-black">{children}</body>
     </html>
   );
 }
