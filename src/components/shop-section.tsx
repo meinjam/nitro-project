@@ -32,7 +32,7 @@ export function ShopSection({
       ref={sectionRef}
       className="nitro-radial-bg relative flex min-h-svh w-full items-center overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20"
     >
-      <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-30">
+      <div className="nitro-container px-5 sm:px-8 md:px-12 lg:px-16 xl:px-30">
         {/* Desktop & Tablet 5-Can Stepped Showcase (exact Figma Energy Drink 003) */}
         <div className="hidden md:grid grid-cols-[8.73fr_10.31fr_13.36fr_10.31fr_8.73fr] items-end gap-x-[4vw] lg:gap-x-[5.5vw] xl:gap-x-[7.5vw]">
           {NITRO_PRODUCTS.map((product, idx) => {

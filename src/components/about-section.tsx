@@ -26,7 +26,7 @@ export function AboutSection({
       ref={sectionRef}
       className="nitro-radial-bg relative flex min-h-svh w-full items-center overflow-hidden py-16 sm:py-20 lg:py-24"
     >
-      <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-10 lg:px-14 xl:px-16">
+      <div className="nitro-container px-5 sm:px-10 lg:px-14 xl:px-16">
         <h2 className="sr-only">Since 2002 producing</h2>
 
         <div className="relative flex flex-col items-center gap-7 sm:gap-8 lg:block lg:h-[min(84vh,920px)]">

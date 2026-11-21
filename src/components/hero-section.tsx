@@ -26,7 +26,7 @@ export function HeroSection({
       <div className="h-2 sm:h-4" aria-hidden="true" />
 
       {/* Centerpiece: Giant NiTRO Wordmark + Untransformed Can Measurement Anchor */}
-      <div className="relative mx-auto my-auto flex w-full max-w-[1920px] items-center justify-center px-4 sm:px-10 lg:px-14 xl:px-22 py-8">
+      <div className="nitro-container relative my-auto flex items-center justify-center px-4 sm:px-10 lg:px-14 xl:px-22 py-8">
         <h1 className="sr-only">NiTRO Energy Drink</h1>
 
         <motion.div
@@ -89,7 +89,7 @@ export function HeroSection({
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.65, delay: 0.2 }}
-        className="relative z-10 mx-auto w-full max-w-[1920px] px-5 sm:px-10 lg:px-14 xl:px-22"
+        className="nitro-container relative z-10 px-5 sm:px-10 lg:px-14 xl:px-22"
       >
         <div className="flex flex-col items-center gap-7 text-center lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-end lg:gap-8 lg:text-left">
           <p className="max-w-123.75 text-[14px] sm:text-[15px] xl:text-[16px] font-normal uppercase leading-6 text-white">
@@ -100,13 +100,13 @@ export function HeroSection({
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8.25">
             <a
               href="#shop"
-              className="inline-flex h-11 w-35.5 sm:w-38.25 items-center justify-center bg-white text-[16px] font-medium leading-6 text-black transition-colors duration-200 hover:bg-[#e0e600]"
+              className="inline-flex h-11 w-35.5 sm:w-38.25 items-center justify-center bg-white text-[16px] font-medium leading-6 text-black transition-colors duration-200 hover:bg-nitro-yellow"
             >
               Buy Now
             </a>
             <a
               href="#about"
-              className="inline-flex h-11 w-35.5 sm:w-39.75 items-center justify-center border border-white text-[16px] font-medium leading-6 text-white transition-colors duration-200 hover:border-[#e0e600] hover:text-[#e0e600]"
+              className="inline-flex h-11 w-35.5 sm:w-39.75 items-center justify-center border border-white text-[16px] font-medium leading-6 text-white transition-colors duration-200 hover:border-nitro-yellow hover:text-nitro-yellow"
             >
               More info
             </a>

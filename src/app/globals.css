@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+  --color-nitro-yellow: #e0e600;
+}
+
+@utility nitro-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1920px;
+}
+
 @layer base {
   html {
     background-color: #000000;
@@ -23,7 +33,7 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #e0e600;
+    background: var(--color-nitro-yellow);
   }
 
   body {

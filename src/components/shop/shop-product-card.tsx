@@ -47,7 +47,7 @@ export function ShopProductCard({
       className={cn(
         "flex flex-col items-center select-none",
         isCenter &&
-          "rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#e0e600]",
+          "rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-nitro-yellow",
         cardClassName
       )}
     >

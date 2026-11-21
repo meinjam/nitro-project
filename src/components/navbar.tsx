@@ -39,7 +39,7 @@ export function Navbar() {
     >
       <div
         className={cn(
-          "mx-auto flex w-full max-w-[1920px] items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-22 transition-[height] duration-300",
+          "nitro-container flex items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-22 transition-[height] duration-300",
           scrolled ? "h-16 sm:h-19" : "h-19 sm:h-27"
         )}
       >
@@ -60,7 +60,7 @@ export function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="text-[16px] font-normal leading-6 text-white transition-colors duration-200 hover:text-[#e0e600]"
+              className="text-[16px] font-normal leading-6 text-white transition-colors duration-200 hover:text-nitro-yellow"
             >
               {link.label}
             </a>
@@ -70,7 +70,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <a
             href="#shop"
-            className="hidden sm:inline-flex h-11 w-38.25 items-center justify-center bg-[#e0e600] text-[16px] font-medium leading-6 text-black transition-opacity duration-200 hover:opacity-90"
+            className="hidden sm:inline-flex h-11 w-38.25 items-center justify-center bg-nitro-yellow text-[16px] font-medium leading-6 text-black transition-opacity duration-200 hover:opacity-90"
           >
             Buy Now
           </a>
@@ -85,8 +85,8 @@ export function Navbar() {
             className={cn(
               "inline-flex lg:hidden h-10 w-10 items-center justify-center border transition-colors duration-200 cursor-pointer",
               mobileOpen
-                ? "border-[#e0e600] text-[#e0e600]"
-                : "border-white/25 text-white hover:border-[#e0e600] hover:text-[#e0e600]"
+                ? "border-nitro-yellow text-nitro-yellow"
+                : "border-white/25 text-white hover:border-nitro-yellow hover:text-nitro-yellow"
             )}
           >
             <span className="relative h-3.5 w-4.5" aria-hidden="true">
@@ -148,7 +148,7 @@ export function Navbar() {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   onClick={() => setMobileOpen(false)}
-                  className="border-b border-white/10 py-3 text-[17px] text-white transition-colors hover:text-[#e0e600] last:border-b-0"
+                  className="border-b border-white/10 py-3 text-[17px] text-white transition-colors hover:text-nitro-yellow last:border-b-0"
                 >
                   {link.label}
                 </motion.a>
@@ -164,7 +164,7 @@ export function Navbar() {
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 onClick={() => setMobileOpen(false)}
-                className="mt-4 flex h-11 w-full items-center justify-center bg-[#e0e600] text-[16px] font-medium text-black"
+                className="mt-4 flex h-11 w-full items-center justify-center bg-nitro-yellow text-[16px] font-medium text-black"
               >
                 Buy Now
               </motion.a>

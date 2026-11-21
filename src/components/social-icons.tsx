@@ -66,7 +66,7 @@ export function SocialIcons() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={item.name}
-          className="inline-flex h-10.5 w-10.5 items-center justify-center rounded-full border border-[#e0e600] text-[#e0e600] transition-all duration-300 hover:scale-110 hover:bg-[#e0e600] hover:text-black"
+          className="inline-flex h-10.5 w-10.5 items-center justify-center rounded-full border border-nitro-yellow text-nitro-yellow transition-all duration-300 hover:scale-110 hover:bg-nitro-yellow hover:text-black"
         >
           {item.icon}
         </a>
