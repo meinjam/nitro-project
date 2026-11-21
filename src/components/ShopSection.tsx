@@ -1,7 +1,17 @@
 "use client";
 
+import type { RefObject } from "react";
 import Image from "next/image";
 import { NITRO_PRODUCTS } from "@/data/products";
+
+interface ShopSectionProps {
+  sectionRef?: RefObject<HTMLElement | null>;
+  desktopCenterCanRef?: RefObject<HTMLDivElement | null>;
+  mobileCenterCanRef?: RefObject<HTMLDivElement | null>;
+  desktopPedestalRef?: RefObject<HTMLDivElement | null>;
+  mobilePedestalRef?: RefObject<HTMLDivElement | null>;
+  hideStaticCan?: boolean;
+}
 
 function CanRightShadow({ uid }: { uid: string }) {
   const filterId = `filter0_f_1_236_${uid}`;
@@ -12,7 +22,7 @@ function CanRightShadow({ uid }: { uid: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      className="pointer-events-none absolute top-1/2 -right-[40%] z-[5] w-[77.5%] h-[130.8%] -translate-y-1/2"
+      className="pointer-events-none absolute top-1/2 -right-[40%] z-[8] w-[77.5%] h-[130.8%] -translate-y-1/2"
     >
       <g filter={`url(#${filterId})`}>
         <ellipse cx="64.9174" cy="288.939" rx="21.8602" ry="245.882" fill="black" />
@@ -51,85 +61,105 @@ function FlankingCanShadow({ className }: { className: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      className={`pointer-events-none absolute left-1/2 z-0 h-auto -translate-x-1/2 ${className}`}
+      className={`pointer-events-none absolute left-1/2 z-[5] h-auto -translate-x-1/2 ${className}`}
     >
       <ellipse cx="108.5" cy="16.3774" rx="108.5" ry="16.3774" fill="#212121" />
     </svg>
   );
 }
 
-function NitroGreenPedestal({ uid }: { uid: string }) {
+function NitroGreenPedestal({
+  uid,
+  pedestalRef,
+}: {
+  uid: string;
+  pedestalRef?: RefObject<HTMLDivElement | null>;
+}) {
   const filterId = `filter0_d_1_176_${uid}`;
   const maskId = `stroke0_1_176_${uid}`;
 
   return (
-    <svg
-      viewBox="0 0 325 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+    <div
       aria-hidden="true"
-      className="pointer-events-none absolute left-1/2 -bottom-[6.9%] z-0 w-[126.65%] h-auto -translate-x-1/2"
+      className="pointer-events-none absolute left-1/2 -bottom-[6.9%] z-[5] w-[126.65%] -translate-x-1/2"
     >
-      <g filter={`url(#${filterId})`}>
-        <ellipse cx="162.4" cy="45.9" rx="132.5" ry="20" fill="#828282" />
-        <mask id={maskId} fill="white">
-          <path d="M294.9 45.9C294.9 56.9457 235.578 65.9 162.4 65.9C89.2223 65.9 29.9 56.9457 29.9 45.9C29.9 34.8543 89.2223 25.9 162.4 25.9C235.578 25.9 294.9 34.8543 294.9 45.9Z" />
-        </mask>
-        <ellipse
-          cx="162.4"
-          cy="45.9"
-          rx="132.5"
-          ry="20"
-          strokeWidth="6"
-          stroke="#3C3C3C"
-          mask={`url(#${maskId})`}
-        />
-      </g>
-      <defs>
-        <filter
-          id={filterId}
-          x="2.47955e-05"
-          y="-5.72205e-06"
-          width="324.8"
-          height="99.8"
-          filterUnits="userSpaceOnUse"
-          colorInterpolationFilters="sRGB"
+      <div ref={pedestalRef} className="w-full will-change-transform">
+        <svg
+          viewBox="0 0 325 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-auto w-full"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-            result="hardAlpha"
+        <g filter={`url(#${filterId})`}>
+          <ellipse cx="162.4" cy="45.9" rx="132.5" ry="20" fill="#828282" />
+          <mask id={maskId} fill="white">
+            <path d="M294.9 45.9C294.9 56.9457 235.578 65.9 162.4 65.9C89.2223 65.9 29.9 56.9457 29.9 45.9C29.9 34.8543 89.2223 25.9 162.4 25.9C235.578 25.9 294.9 34.8543 294.9 45.9Z" />
+          </mask>
+          <ellipse
+            cx="162.4"
+            cy="45.9"
+            rx="132.5"
+            ry="20"
+            strokeWidth="6"
+            stroke="#3C3C3C"
+            mask={`url(#${maskId})`}
           />
-          <feOffset dy="4" />
-          <feGaussianBlur stdDeviation="14.95" />
-          <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0.878431 0 0 0 0 0.901961 0 0 0 0 0 0 0 0 0.36 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow_1_176"
-          />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="effect1_dropShadow_1_176"
-            result="shape"
-          />
-        </filter>
-      </defs>
-    </svg>
+        </g>
+        <defs>
+          <filter
+            id={filterId}
+            x="2.47955e-05"
+            y="-5.72205e-06"
+            width="324.8"
+            height="99.8"
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feColorMatrix
+              in="SourceAlpha"
+              type="matrix"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha"
+            />
+            <feOffset dy="4" />
+            <feGaussianBlur stdDeviation="14.95" />
+            <feComposite in2="hardAlpha" operator="out" />
+            <feColorMatrix
+              type="matrix"
+              values="0 0 0 0 0.878431 0 0 0 0 0.901961 0 0 0 0 0 0 0 0 0.36 0"
+            />
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow_1_176"
+            />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow_1_176"
+              result="shape"
+            />
+          </filter>
+        </defs>
+        </svg>
+      </div>
+    </div>
   );
 }
 
-export function ShopSection() {
+export function ShopSection({
+  sectionRef,
+  desktopCenterCanRef,
+  mobileCenterCanRef,
+  desktopPedestalRef,
+  mobilePedestalRef,
+  hideStaticCan = false,
+}: ShopSectionProps) {
   return (
     <section
       id="shop"
+      ref={sectionRef}
       className="nitro-radial-bg relative flex min-h-[100svh] w-full items-center overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20"
     >
       <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-[120px]">
@@ -157,7 +187,10 @@ export function ShopSection() {
                 {/* Can Image + Exact Figma Floor Ellipse */}
                 <div className="relative flex w-full items-end justify-center">
                   {isCenter ? (
-                    <NitroGreenPedestal uid="desktop" />
+                    <NitroGreenPedestal
+                      uid="desktop"
+                      pedestalRef={desktopPedestalRef}
+                    />
                   ) : (
                     <FlankingCanShadow
                       className={
@@ -168,17 +201,33 @@ export function ShopSection() {
                     />
                   )}
                   <CanRightShadow uid={`desktop-${product.id}`} />
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    className="relative z-10 w-full h-auto object-contain"
-                    draggable={false}
-                  />
+                  {isCenter ? (
+                    <div
+                      ref={desktopCenterCanRef}
+                      className="relative z-[10] aspect-[514/1351] w-full"
+                    >
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        className={`h-full w-full object-contain ${
+                          hideStaticCan ? "opacity-0 invisible" : ""
+                        }`}
+                        draggable={false}
+                      />
+                    </div>
+                  ) : (
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      className="relative z-[10] w-full h-auto object-contain"
+                      draggable={false}
+                    />
+                  )}
                 </div>
 
                 {/* Product Info */}
                 <div
-                  className={`flex flex-col items-center text-center ${
+                  className={`relative z-[10] flex flex-col items-center text-center ${
                     isCenter
                       ? "mt-8 lg:mt-10 xl:mt-[48px]"
                       : "mt-7 lg:mt-9 xl:mt-[46px]"
@@ -214,16 +263,26 @@ export function ShopSection() {
                 className="flex w-[190px] sm:w-[220px] flex-col items-center rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#e0e600]"
               >
                 <div className="relative flex w-full items-end justify-center">
-                  <NitroGreenPedestal uid="mobile" />
-                  <CanRightShadow uid={`mobile-${center.id}`} />
-                  <Image
-                    src={center.image}
-                    alt={center.name}
-                    className="relative z-10 w-full h-auto object-contain"
-                    draggable={false}
+                  <NitroGreenPedestal
+                    uid="mobile"
+                    pedestalRef={mobilePedestalRef}
                   />
+                  <CanRightShadow uid={`mobile-${center.id}`} />
+                  <div
+                    ref={mobileCenterCanRef}
+                    className="relative z-[10] aspect-[514/1351] w-full"
+                  >
+                    <Image
+                      src={center.image}
+                      alt={center.name}
+                      className={`h-full w-full object-contain ${
+                        hideStaticCan ? "opacity-0 invisible" : ""
+                      }`}
+                      draggable={false}
+                    />
+                  </div>
                 </div>
-                <div className="mt-8 flex flex-col items-center text-center">
+                <div className="relative z-[10] mt-8 flex flex-col items-center text-center">
                   <h3 className="sr-only">{center.name}</h3>
                   <Image
                     src={center.titleImage}
@@ -259,11 +318,11 @@ export function ShopSection() {
                   <Image
                     src={product.image}
                     alt={product.name}
-                    className="relative z-10 w-full h-auto object-contain"
+                    className="relative z-[10] w-full h-auto object-contain"
                     draggable={false}
                   />
                 </div>
-                <div className="mt-6 flex flex-col items-center text-center">
+                <div className="relative z-[10] mt-6 flex flex-col items-center text-center">
                   <h3 className="sr-only">{product.name}</h3>
                   <Image
                     src={product.titleImage}
