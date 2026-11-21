@@ -2,6 +2,8 @@
 
 import type { RefObject } from "react";
 import Image from "next/image";
+import canBaseHorizontal from "@/assets/can-base-horizontal.png";
+import canCoverGreen from "@/assets/can-cover-green.png";
 import { NITRO_PRODUCTS } from "@/data/products";
 
 interface ShopSectionProps {
@@ -11,6 +13,71 @@ interface ShopSectionProps {
   desktopPedestalRef?: RefObject<HTMLDivElement | null>;
   mobilePedestalRef?: RefObject<HTMLDivElement | null>;
   hideStaticCan?: boolean;
+}
+
+/**
+ * Exact Figma Can Container child composition (nodes 1:235 ENG, 1:223 RED, 1:229 SKY, 1:241 BLUE):
+ *  - Can (metallic aluminum base with water droplets, rotated -90° upright)
+ *  - Mask group (mix-blend-color-burn masked by Can silhouette):
+ *      - Pack 1 (isolated Cover texture + Figma HUE solid tint overlay)
+ */
+function LayeredFlankingCan({
+  name,
+  hueColor,
+}: {
+  name: string;
+  hueColor?: string;
+}) {
+  return (
+    <div
+      role="img"
+      aria-label={name}
+      className="relative z-[10] aspect-[340/896] w-full select-none"
+    >
+      {/* Rotate the native 896×340 horizontal can composition -90° so it fills 340×896 upright */}
+      <div className="absolute top-1/2 left-1/2 h-[37.9464%] w-[263.5294%] -translate-x-1/2 -translate-y-1/2 -rotate-90">
+        <div className="relative isolate h-full w-full">
+          {/* Child 2: Metallic Aluminum Can Base with Water Droplets & Silver Top Rim */}
+          <Image
+            src={canBaseHorizontal}
+            alt=""
+            className="h-full w-full object-fill select-none"
+            draggable={false}
+          />
+
+          {/* Child 3: Mask group (Can silhouette mask + Pack 1 with COLOR_BURN blend) */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 overflow-hidden mix-blend-color-burn"
+            style={{
+              maskImage: `url(${canBaseHorizontal.src})`,
+              WebkitMaskImage: `url(${canBaseHorizontal.src})`,
+              maskSize: "100% 100%",
+              WebkitMaskSize: "100% 100%",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+            }}
+          >
+            {/* Pack 1: Cover image + Figma HUE solid color fill isolated before color-burn */}
+            <div className="relative isolate h-full w-[98.27%]">
+              <Image
+                src={canCoverGreen}
+                alt=""
+                className="h-full w-full max-w-none object-fill select-none"
+                draggable={false}
+              />
+              {hueColor && (
+                <div
+                  className="pointer-events-none absolute inset-0 mix-blend-hue"
+                  style={{ backgroundColor: hueColor }}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function CanRightShadow({ uid }: { uid: string }) {
@@ -216,11 +283,9 @@ export function ShopSection({
                       />
                     </div>
                   ) : (
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      className="relative z-[10] w-full h-auto object-contain"
-                      draggable={false}
+                    <LayeredFlankingCan
+                      name={product.name}
+                      hueColor={product.hueColor}
                     />
                   )}
                 </div>
@@ -315,11 +380,9 @@ export function ShopSection({
                 <div className="relative flex w-[118px] sm:w-[140px] items-end justify-center">
                   <FlankingCanShadow className="w-[105%] -bottom-[2.4%]" />
                   <CanRightShadow uid={`mobile-${product.id}`} />
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    className="relative z-[10] w-full h-auto object-contain"
-                    draggable={false}
+                  <LayeredFlankingCan
+                    name={product.name}
+                    hueColor={product.hueColor}
                   />
                 </div>
                 <div className="relative z-[10] mt-6 flex flex-col items-center text-center">

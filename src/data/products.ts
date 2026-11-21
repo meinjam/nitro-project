@@ -18,6 +18,7 @@ export interface NitroProduct {
   image: StaticImageData;
   titleImage: StaticImageData;
   glowColor: string;
+  hueColor?: string;
 }
 
 export const NITRO_PRODUCTS: NitroProduct[] = [
@@ -29,6 +30,7 @@ export const NITRO_PRODUCTS: NitroProduct[] = [
     image: canEng,
     titleImage: titleEng,
     glowColor: "rgba(245, 158, 11, 0.45)",
+    hueColor: "#ff8000",
   },
   {
     id: "nitro-red",
@@ -38,6 +40,7 @@ export const NITRO_PRODUCTS: NitroProduct[] = [
     image: canRed,
     titleImage: titleRed,
     glowColor: "rgba(239, 68, 68, 0.45)",
+    hueColor: "#ff0000",
   },
   {
     id: "nitro-green",
@@ -56,6 +59,7 @@ export const NITRO_PRODUCTS: NitroProduct[] = [
     image: canSky,
     titleImage: titleSky,
     glowColor: "rgba(0, 178, 255, 0.45)",
+    hueColor: "#00b2ff",
   },
   {
     id: "nitro-blue",
@@ -65,5 +69,6 @@ export const NITRO_PRODUCTS: NitroProduct[] = [
     image: canBlue,
     titleImage: titleBlue,
     glowColor: "rgba(59, 130, 246, 0.48)",
+    hueColor: "#0004ff",
   },
 ];
