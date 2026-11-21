@@ -30,9 +30,9 @@ export function ShopSection({
       ref={sectionRef}
       className="nitro-radial-bg relative flex min-h-svh w-full items-center overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20"
     >
-      <div className="nitro-container px-5 sm:px-8 md:px-12 lg:px-16 xl:px-30">
+      <div className="nitro-container px-5 sm:px-8 md:px-[6.25%]">
         {/* Desktop & Tablet 5-Can Stepped Showcase (exact Figma Energy Drink 003) */}
-        <div className="hidden grid-cols-[8.73fr_10.31fr_13.36fr_10.31fr_8.73fr] items-end gap-x-[4vw] md:grid lg:gap-x-[5.5vw] xl:gap-x-[7.5vw]">
+        <div className="hidden grid-cols-[8.73fr_10.31fr_13.36fr_10.31fr_8.73fr] items-end gap-x-[min(9.01vw,173px)] md:grid">
           {NITRO_PRODUCTS.map((product, idx) => {
             const isCenter = idx === CENTER_PRODUCT_INDEX;
             const isInner = idx === 1 || idx === 3;
@@ -47,7 +47,7 @@ export function ShopSection({
                 canAnchorRef={isCenter ? desktopCenterCanRef : undefined}
                 pedestalRef={isCenter ? desktopPedestalRef : undefined}
                 hideStaticCan={hideStaticCan}
-                cardClassName={isCenter ? "translate-y-7.5 xl:translate-y-9.5" : ""}
+                cardClassName={isCenter ? "translate-y-[26px] xl:translate-y-[35px]" : ""}
               />
             );
           })}

@@ -55,7 +55,7 @@ export function ScrollCanStage({
           {/* About deep ground shadow: pure radial gradient (zero live blur filter for 60/120fps scroll) */}
           <div
             ref={aboutShadowRef}
-            className="pointer-events-none absolute right-[-4%] bottom-[-24%] left-[-4%] z-0 h-[56%]"
+            className="pointer-events-none absolute right-[-6%] bottom-[-18%] left-[4%] z-0 h-[38%]"
             style={{
               background:
                 "radial-gradient(ellipse 50% 48% at 50% 50%, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.62) 48%, rgba(0, 0, 0, 0) 100%)",

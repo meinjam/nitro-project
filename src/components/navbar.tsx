@@ -14,31 +14,21 @@ const TOGGLE_TRANSITION = {
 };
 
 export function Navbar() {
-  const { scrolled, visible, show } = useNavbarScrollState();
+  const scrolled = useNavbarScrollState();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const isShown = visible || mobileOpen;
-
   return (
-    <motion.header
-      initial={false}
-      animate={isShown ? { y: "0%", opacity: 1 } : { y: "-100%", opacity: 0 }}
-      transition={isShown ? { duration: 0.38, ease: [0.22, 1, 0.36, 1] } : { duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-      onFocus={show}
+    <header
       className={cn(
-        "fixed top-0 right-0 left-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 will-change-transform",
-        scrolled || mobileOpen
-          ? "border-b border-white/6 bg-black/80 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent",
-        isShown ? "pointer-events-auto" : "pointer-events-none"
+        "fixed top-0 right-0 left-0 z-50 transition-colors duration-300",
+        mobileOpen
+          ? "border-b border-white/10 bg-black/90 backdrop-blur-md"
+          : scrolled
+            ? "bg-gradient-to-b from-black/85 via-black/45 to-transparent"
+            : "bg-transparent"
       )}
     >
-      <div
-        className={cn(
-          "nitro-container flex items-center justify-between px-5 transition-[height] duration-300 sm:px-10 lg:px-14 xl:px-22",
-          scrolled ? "h-16 sm:h-19" : "h-19 sm:h-27"
-        )}
-      >
+      <div className="nitro-container flex h-19 items-center justify-between px-5 sm:h-27 sm:px-10 lg:px-14 xl:px-22">
         <a href="#home" aria-label="NiTRO Home" className="shrink-0">
           <Image src={nitroLogo} alt="NiTRO" priority className="h-4.5 w-auto object-contain sm:h-5.5" />
         </a>
@@ -148,6 +138,6 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }

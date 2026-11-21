@@ -69,17 +69,20 @@ export function ShopProductCard({
       <div
         className={cn(
           "relative z-10 flex flex-col items-center text-center",
-          isDesktop ? (isCenter ? "mt-8 lg:mt-10 xl:mt-12" : "mt-7 lg:mt-9 xl:mt-11.5") : isCenter ? "mt-8" : "mt-6"
+          isDesktop
+            ? isCenter
+              ? "mt-6 lg:mt-7.5 xl:mt-[35.5px]"
+              : "mt-7 lg:mt-9 xl:mt-11.5"
+            : isCenter
+              ? "mt-8"
+              : "mt-6"
         )}
       >
         <h3 className="sr-only">{product.name}</h3>
         <Image
           src={product.titleImage}
           alt={product.name}
-          className={cn(
-            "w-auto object-contain",
-            isDesktop ? "h-3.75 lg:h-4.5 xl:h-5.25" : isCenter ? "h-4.75" : "h-3.75"
-          )}
+          className={cn("w-auto object-contain", isDesktop ? "h-3 lg:h-3.5 xl:h-4.25" : isCenter ? "h-4.75" : "h-3.75")}
           draggable={false}
         />
         <p

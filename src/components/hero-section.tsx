@@ -18,7 +18,7 @@ export function HeroSection({ canAnchorRef, hideStaticCan = false }: HeroSection
   return (
     <section
       id="home"
-      className="nitro-radial-bg relative flex min-h-svh w-full flex-col justify-between overflow-hidden pt-24 pb-10 sm:pt-28 sm:pb-14 lg:pb-16"
+      className="nitro-radial-bg relative flex min-h-svh w-full flex-col justify-between overflow-hidden pt-24 pb-10 sm:pt-28 sm:pb-14 lg:pt-19 lg:pb-[14.1vh]"
     >
       <div className="h-2 sm:h-4" aria-hidden="true" />
 

@@ -2,43 +2,18 @@
 
 import { useEffect, useState } from "react";
 
-interface NavbarScrollState {
-  scrolled: boolean;
-  visible: boolean;
-  show: () => void;
-}
-
 const SCROLLED_OFFSET = 24;
-const TOP_PIN_OFFSET = 40;
-const DIRECTION_THRESHOLD = 8;
 
 /**
- * Tracks scroll direction with hysteresis so the navbar stays pinned at the top,
- * hides smoothly while scrolling down, and reappears immediately on reverse (upward) scroll.
+ * Tracks whether the page has scrolled past the top threshold so the fixed navbar
+ * can apply a subtle dark readability backdrop while remaining visible at constant height.
  */
-export function useNavbarScrollState(): NavbarScrollState {
+export function useNavbarScrollState(): boolean {
   const [scrolled, setScrolled] = useState(false);
-  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    let lastY = window.scrollY;
-
     const onScroll = () => {
-      const currentY = Math.max(0, window.scrollY);
-      const delta = currentY - lastY;
-
-      setScrolled(currentY > SCROLLED_OFFSET);
-
-      if (currentY <= TOP_PIN_OFFSET) {
-        setVisible(true);
-        lastY = currentY;
-        return;
-      }
-
-      if (Math.abs(delta) < DIRECTION_THRESHOLD) return;
-
-      setVisible(delta < 0);
-      lastY = currentY;
+      setScrolled(window.scrollY > SCROLLED_OFFSET);
     };
 
     onScroll();
@@ -46,9 +21,5 @@ export function useNavbarScrollState(): NavbarScrollState {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return {
-    scrolled,
-    visible,
-    show: () => setVisible(true),
-  };
+  return scrolled;
 }
