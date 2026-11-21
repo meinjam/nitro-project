@@ -51,14 +51,18 @@ export function ScrollCanStage({
             />
           </div>
 
-          {/* About deep ground shadow (fades in at About, fades out before vertical rotation into Shop) */}
+          {/* About deep ground shadow: pure radial gradient (zero live blur filter for 60/120fps scroll) */}
           <div
             ref={aboutShadowRef}
-            className="pointer-events-none absolute -bottom-[10%] left-[5%] right-[5%] z-0 h-[24%] rounded-full bg-black/85 blur-3xl"
+            className="pointer-events-none absolute -bottom-[24%] -left-[4%] -right-[4%] z-0 h-[56%]"
+            style={{
+              background:
+                "radial-gradient(ellipse 50% 48% at 50% 50%, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.62) 48%, rgba(0, 0, 0, 0) 100%)",
+            }}
           />
 
           {/* Isolated 3D Can Cylinder: fixed metallic base + 360° wrapping label mask */}
-          <div className="relative z-10 isolate h-full w-full drop-shadow-[0_24px_38px_rgba(0,0,0,0.85)]">
+          <div className="relative z-10 isolate h-full w-full">
             {/* Stationary Metallic Aluminum Cylinder with Water Droplets & Silver Top Rim */}
             <Image
               src={canBaseHorizontal}

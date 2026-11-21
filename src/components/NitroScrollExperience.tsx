@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Lenis from "lenis";
 import { AboutSection } from "./AboutSection";
 import { HeroSection } from "./HeroSection";
 import { ScrollCanStage } from "./ScrollCanStage";
@@ -43,6 +44,33 @@ export function NitroScrollExperience() {
   const labelTrackRef = useRef<HTMLDivElement>(null);
   const heroShadowRef = useRef<HTMLDivElement>(null);
   const aboutShadowRef = useRef<HTMLDivElement>(null);
+
+  // Smooth inertia scrolling via Lenis synced directly to GSAP's ticker & ScrollTrigger
+  useEffect(() => {
+    const lenis = new Lenis({
+      lerp: 0.085,
+      smoothWheel: true,
+      wheelMultiplier: 0.9,
+      anchors: {
+        duration: 1.4,
+      },
+      autoRaf: false,
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const tickLenis = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(tickLenis);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(tickLenis);
+      lenis.destroy();
+    };
+  }, []);
 
   useGSAP(
     () => {
@@ -187,12 +215,13 @@ export function NitroScrollExperience() {
           }
 
           // Master bidirectional scrubbed timeline: Hero -> About -> Shop
+          // scrub: true locks 1:1 with Lenis's smooth inertia (zero double-smoothing lag)
           tl = gsap.timeline({
             scrollTrigger: {
               trigger: mainEl,
               start: "top top",
               end: () => `+=${endScroll}`,
-              scrub: 0.65,
+              scrub: true,
               onUpdate: (self) => {
                 if (!floatTween || !floatEl) return;
                 if (self.progress > 0.015) {

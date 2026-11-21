@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -24,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} scroll-smooth`}>
+    <html lang="en" className={outfit.variable}>
       <body className="bg-black text-white antialiased selection:bg-[#e0e600] selection:text-black">
         {children}
       </body>
