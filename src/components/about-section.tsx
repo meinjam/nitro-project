@@ -29,27 +29,27 @@ export function AboutSection({
       <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-10 lg:px-14 xl:px-[64px]">
         <h2 className="sr-only">Since 2002 producing</h2>
 
-        <div className="relative flex flex-col items-center gap-10 lg:block lg:h-[min(84vh,920px)]">
+        <div className="relative flex flex-col items-center gap-7 sm:gap-8 lg:block lg:h-[min(84vh,920px)]">
           {/* Left: Rounded 40px Monochrome Athlete Image (z-[5]: behind animated can z-[15]) */}
-          <div className="relative w-full max-w-[540px] lg:h-full lg:w-[49.3%] lg:max-w-[884px]">
+          <div className="relative w-full max-w-[460px] sm:max-w-[500px] lg:h-full lg:w-[49.3%] lg:max-w-[884px]">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: "some" }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-[5] h-full w-full overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px]"
+              className="relative z-[5] max-h-[44svh] sm:max-h-[46svh] lg:max-h-none lg:h-full w-full overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px]"
             >
               <Image
                 src={heroSoccer}
                 alt="Football athlete in action"
-                className="h-full w-full object-cover grayscale"
+                className="h-full w-full object-cover object-top grayscale"
               />
             </motion.div>
 
             {/* Mobile/Tablet Horizontal Can Anchor (untransformed for exact GSAP measurement) */}
             <div
               ref={mobileCanAnchorRef}
-              className="relative z-[10] -mt-14 mx-auto aspect-[896/340] w-[92%] sm:w-[82%] lg:hidden"
+              className="relative z-[10] -mt-12 sm:-mt-14 mx-auto aspect-[896/340] w-[92%] sm:w-[82%] lg:hidden"
             >
               {!hideStaticCan && (
                 <NitroCan alt="Nitro Green oversized horizontal can" />
@@ -88,7 +88,7 @@ export function AboutSection({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-[25] w-[78%] max-w-[380px] lg:absolute lg:right-[1%] lg:top-1/2 lg:-translate-y-1/2 lg:w-[33%] lg:max-w-[594px]"
+            className="relative z-[25] w-[68%] max-w-[260px] sm:max-w-[300px] lg:absolute lg:right-[1%] lg:top-1/2 lg:-translate-y-1/2 lg:w-[33%] lg:max-w-[594px]"
           >
             <Image
               src={since2002Producing}

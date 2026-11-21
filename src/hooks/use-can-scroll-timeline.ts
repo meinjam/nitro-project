@@ -133,8 +133,8 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
           const shopSecTop =
             shopSection.getBoundingClientRect().top - mainRect.top;
 
-          // Base size matches largest horizontal state (About) so scale <= 1 everywhere
-          const baseW = Math.max(aboutBox.width, heroBox.width);
+          // Base size matches largest visual span across Hero, About, and upright Shop so scale <= 1 everywhere
+          const baseW = Math.max(aboutBox.width, heroBox.width, shopBox.height);
           const baseH = baseW * CAN_ASPECT_RATIO;
 
           const heroScale = heroBox.width / baseW;
