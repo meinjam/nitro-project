@@ -4,6 +4,7 @@ import type { RefObject } from "react";
 import Image from "next/image";
 import { NitroCan } from "@/components/can/nitro-can";
 import type { NitroProduct } from "@/data/products";
+import { cn } from "@/lib/utils";
 import {
   CanRightShadow,
   FlankingCanShadow,
@@ -43,14 +44,15 @@ export function ShopProductCard({
           ? `${product.name}, ${product.subtitle}, ${product.price}`
           : undefined
       }
-      className={`flex flex-col items-center select-none ${
-        isCenter
-          ? "rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#e0e600]"
-          : ""
-      } ${cardClassName}`}
+      className={cn(
+        "flex flex-col items-center select-none",
+        isCenter &&
+          "rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#e0e600]",
+        cardClassName
+      )}
     >
       {/* Can Composition + Exact Figma Floor Ellipse & Right Shadow */}
-      <div className={`relative flex items-end justify-center ${canWrapperClassName}`}>
+      <div className={cn("relative flex items-end justify-center", canWrapperClassName)}>
         {isCenter ? (
           <NitroGreenPedestal uid={variant} pedestalRef={pedestalRef} />
         ) : (
@@ -63,7 +65,7 @@ export function ShopProductCard({
             <NitroCan
               alt={product.name}
               orientation="vertical"
-              className={hideStaticCan ? "opacity-0 invisible" : ""}
+              className={cn(hideStaticCan && "opacity-0 invisible")}
             />
           </div>
         ) : (
@@ -78,7 +80,8 @@ export function ShopProductCard({
 
       {/* Product Typography */}
       <div
-        className={`relative z-[10] flex flex-col items-center text-center ${
+        className={cn(
+          "relative z-[10] flex flex-col items-center text-center",
           isDesktop
             ? isCenter
               ? "mt-8 lg:mt-10 xl:mt-[48px]"
@@ -86,40 +89,43 @@ export function ShopProductCard({
             : isCenter
               ? "mt-8"
               : "mt-6"
-        }`}
+        )}
       >
         <h3 className="sr-only">{product.name}</h3>
         <Image
           src={product.titleImage}
           alt={product.name}
-          className={
+          className={cn(
+            "w-auto object-contain",
             isDesktop
-              ? "h-[15px] lg:h-[18px] xl:h-[21px] w-auto object-contain"
+              ? "h-[15px] lg:h-[18px] xl:h-[21px]"
               : isCenter
-                ? "h-[19px] w-auto object-contain"
-                : "h-[15px] w-auto object-contain"
-          }
+                ? "h-[19px]"
+                : "h-[15px]"
+          )}
           draggable={false}
         />
         <p
-          className={
+          className={cn(
+            "text-white/[0.58]",
             isDesktop
-              ? "mt-1.5 text-[13px] lg:text-[15px] xl:text-[17px] font-normal leading-[1.5] text-white/[0.58] whitespace-nowrap"
+              ? "mt-1.5 text-[13px] lg:text-[15px] xl:text-[17px] font-normal leading-[1.5] whitespace-nowrap"
               : isCenter
-                ? "mt-1.5 text-[16px] text-white/[0.58]"
-                : "mt-1 text-[14px] text-white/[0.58]"
-          }
+                ? "mt-1.5 text-[16px]"
+                : "mt-1 text-[14px]"
+          )}
         >
           {product.subtitle}
         </p>
         <p
-          className={
+          className={cn(
+            "mt-0.5 font-extrabold text-white",
             isDesktop
-              ? "mt-0.5 text-[18px] lg:text-[21px] xl:text-[24px] font-extrabold leading-[1.5] text-white whitespace-nowrap"
+              ? "text-[18px] lg:text-[21px] xl:text-[24px] leading-[1.5] whitespace-nowrap"
               : isCenter
-                ? "mt-0.5 text-[22px] font-extrabold text-white"
-                : "mt-0.5 text-[18px] font-extrabold text-white"
-          }
+                ? "text-[22px]"
+                : "text-[18px]"
+          )}
         >
           {product.price}
         </p>

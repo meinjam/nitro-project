@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import canHeroShadow from "@/assets/can-hero-shadow.png";
 import nitroWordmark from "@/assets/nitro-wordmark.png";
+import { cn } from "@/lib/utils";
 import { NitroCan } from "./can/nitro-can";
 import { SocialIcons } from "./social-icons";
 
@@ -57,7 +58,7 @@ export function HeroSection({
                 delay: hideStaticCan ? 0 : 0.12,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className={`h-full w-full ${hideStaticCan ? "invisible" : ""}`}
+              className={cn("h-full w-full", hideStaticCan && "invisible")}
             >
               <motion.div
                 animate={hideStaticCan ? undefined : { y: [-4, 4, -4] }}

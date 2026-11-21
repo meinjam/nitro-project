@@ -2,11 +2,16 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import nitroLogo from "@/assets/nitro-logo.png";
 import { NAV_LINKS } from "@/data/navigation";
 import { useNavbarScrollState } from "@/hooks/use-navbar-scroll-state";
+import { cn } from "@/lib/utils";
+
+const TOGGLE_TRANSITION = {
+  duration: 0.28,
+  ease: [0.22, 1, 0.36, 1] as const,
+};
 
 export function Navbar() {
   const { scrolled, visible, show } = useNavbarScrollState();
@@ -24,16 +29,19 @@ export function Navbar() {
           : { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
       }
       onFocus={show}
-      className={`fixed top-0 left-0 right-0 z-50 will-change-transform transition-[background-color,border-color,backdrop-filter] duration-300 ${
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 will-change-transform transition-[background-color,border-color,backdrop-filter] duration-300",
         scrolled || mobileOpen
           ? "border-b border-white/[0.06] bg-black/80 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
-      } ${isShown ? "pointer-events-auto" : "pointer-events-none"}`}
+          : "border-b border-transparent bg-transparent",
+        isShown ? "pointer-events-auto" : "pointer-events-none"
+      )}
     >
       <div
-        className={`mx-auto flex w-full max-w-[1920px] items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-[88px] transition-[height] duration-300 ${
+        className={cn(
+          "mx-auto flex w-full max-w-[1920px] items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-[88px] transition-[height] duration-300",
           scrolled ? "h-[64px] sm:h-[76px]" : "h-[76px] sm:h-[108px]"
-        }`}
+        )}
       >
         <a href="#home" aria-label="NiTRO Home" className="shrink-0">
           <Image
@@ -67,15 +75,53 @@ export function Navbar() {
             Buy Now
           </a>
 
-          <button
+          {/* Morphing Hamburger <-> Cross Toggle Button */}
+          <motion.button
             type="button"
+            whileTap={{ scale: 0.92 }}
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            className="inline-flex lg:hidden h-[40px] w-[40px] items-center justify-center border border-white/25 text-white transition-colors hover:border-[#e0e600] hover:text-[#e0e600] cursor-pointer"
+            className={cn(
+              "inline-flex lg:hidden h-[40px] w-[40px] items-center justify-center border transition-colors duration-200 cursor-pointer",
+              mobileOpen
+                ? "border-[#e0e600] text-[#e0e600]"
+                : "border-white/25 text-white hover:border-[#e0e600] hover:text-[#e0e600]"
+            )}
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+            <span className="relative h-[14px] w-[18px]" aria-hidden="true">
+              <motion.span
+                initial={false}
+                animate={
+                  mobileOpen
+                    ? { y: 6.125, rotate: 45 }
+                    : { y: 0, rotate: 0 }
+                }
+                transition={TOGGLE_TRANSITION}
+                className="absolute left-0 top-0 h-[1.75px] w-full origin-center rounded-full bg-current"
+              />
+              <motion.span
+                initial={false}
+                animate={
+                  mobileOpen
+                    ? { opacity: 0, scaleX: 0 }
+                    : { opacity: 1, scaleX: 1 }
+                }
+                transition={TOGGLE_TRANSITION}
+                className="absolute left-0 top-[6.125px] h-[1.75px] w-full origin-center rounded-full bg-current"
+              />
+              <motion.span
+                initial={false}
+                animate={
+                  mobileOpen
+                    ? { y: -6.125, rotate: -45 }
+                    : { y: 0, rotate: 0 }
+                }
+                transition={TOGGLE_TRANSITION}
+                className="absolute left-0 bottom-0 h-[1.75px] w-full origin-center rounded-full bg-current"
+              />
+            </span>
+          </motion.button>
         </div>
       </div>
 
@@ -85,27 +131,43 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.22 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden border-t border-white/10 bg-black/95 lg:hidden"
           >
             <nav aria-label="Mobile" className="flex flex-col px-5 py-5 sm:px-10">
-              {NAV_LINKS.map((link) => (
-                <a
+              {NAV_LINKS.map((link, idx) => (
+                <motion.a
                   key={link.label}
                   href={link.href}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -6 }}
+                  transition={{
+                    duration: 0.22,
+                    delay: idx * 0.035,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                   onClick={() => setMobileOpen(false)}
                   className="border-b border-white/10 py-3 text-[17px] text-white transition-colors hover:text-[#e0e600] last:border-b-0"
                 >
                   {link.label}
-                </a>
+                </motion.a>
               ))}
-              <a
+              <motion.a
                 href="#shop"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 4 }}
+                transition={{
+                  duration: 0.22,
+                  delay: NAV_LINKS.length * 0.035,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
                 onClick={() => setMobileOpen(false)}
                 className="mt-4 flex h-[44px] w-full items-center justify-center bg-[#e0e600] text-[16px] font-medium text-black"
               >
                 Buy Now
-              </a>
+              </motion.a>
             </nav>
           </motion.div>
         )}

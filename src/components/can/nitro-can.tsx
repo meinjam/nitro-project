@@ -4,6 +4,7 @@ import type { CSSProperties, RefObject } from "react";
 import Image from "next/image";
 import canBaseHorizontal from "@/assets/can-base-horizontal.png";
 import canCoverGreen from "@/assets/can-cover-green.png";
+import { cn } from "@/lib/utils";
 
 interface NitroCanProps {
   alt?: string;
@@ -120,7 +121,7 @@ export function NitroCan({
       <div
         role={alt ? "img" : undefined}
         aria-label={alt || undefined}
-        className={`relative aspect-[340/896] w-full select-none ${className}`}
+        className={cn("relative aspect-[340/896] w-full select-none", className)}
       >
         {/* Rotate native 896×340 composition -90° so it fills 340×896 upright */}
         <div className="absolute top-1/2 left-1/2 h-[37.9464%] w-[263.5294%] -translate-x-1/2 -translate-y-1/2 -rotate-90">
@@ -130,5 +131,9 @@ export function NitroCan({
     );
   }
 
-  return <div className={`relative h-full w-full select-none ${className}`}>{canBody}</div>;
+  return (
+    <div className={cn("relative h-full w-full select-none", className)}>
+      {canBody}
+    </div>
+  );
 }

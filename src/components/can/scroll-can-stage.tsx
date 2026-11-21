@@ -3,6 +3,7 @@
 import type { RefObject } from "react";
 import Image from "next/image";
 import canHeroShadow from "@/assets/can-hero-shadow.png";
+import { cn } from "@/lib/utils";
 import { NitroCan } from "./nitro-can";
 
 interface ScrollCanStageProps {
@@ -29,9 +30,10 @@ export function ScrollCanStage({
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 select-none ${
+      className={cn(
+        "pointer-events-none absolute inset-0 select-none",
         visible ? "opacity-100" : "opacity-0"
-      }`}
+      )}
     >
       <div
         ref={canStageRef}

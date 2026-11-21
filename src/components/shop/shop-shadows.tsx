@@ -1,4 +1,5 @@
 import type { RefObject } from "react";
+import { cn } from "@/lib/utils";
 
 export function CanRightShadow({ uid }: { uid: string }) {
   const filterId = `filter0_f_1_236_${uid}`;
@@ -48,7 +49,10 @@ export function FlankingCanShadow({ className }: { className: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      className={`pointer-events-none absolute left-1/2 z-[5] h-auto -translate-x-1/2 ${className}`}
+      className={cn(
+        "pointer-events-none absolute left-1/2 z-[5] h-auto -translate-x-1/2",
+        className
+      )}
     >
       <ellipse cx="108.5" cy="16.3774" rx="108.5" ry="16.3774" fill="#212121" />
     </svg>

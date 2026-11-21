@@ -38,10 +38,12 @@ src/
 ├── data/
 │   ├── navigation.ts                 # Primary navigation links
 │   └── products.ts                   # Product catalog metadata and Figma HUE hex values
-└── hooks/
-    ├── use-can-scroll-timeline.ts    # Responsive DOM-measured 2-phase GSAP ScrollTrigger timeline
-    ├── use-navbar-scroll-state.ts    # Hysteresis scroll-direction hook for auto-hide Navbar
-    └── use-smooth-scroll.ts          # Lenis + GSAP ticker synchronization hook
+├── hooks/
+│   ├── use-can-scroll-timeline.ts    # Responsive DOM-measured 2-phase GSAP ScrollTrigger timeline
+│   ├── use-navbar-scroll-state.ts    # Hysteresis scroll-direction hook for auto-hide Navbar
+│   └── use-smooth-scroll.ts          # Lenis + GSAP ticker synchronization hook
+└── lib/
+    └── utils.ts                      # `cn()` class-name merger (`clsx` + `tailwind-merge`)
 ```
 
 ## Tech Stack
@@ -52,7 +54,7 @@ src/
 - **GSAP 3** (`gsap`, `ScrollTrigger`, `@gsap/react`)
 - **Lenis** (`lenis`)
 - **Motion** (`motion/react`)
-- **Lucide React** (`lucide-react`)
+- **clsx + tailwind-merge** (`cn()` utility)
 
 ## Local Development
 
