@@ -84,13 +84,26 @@ export function ScrollCanStage({
                 WebkitMaskRepeat: "no-repeat",
               }}
             >
-              {/* Seamless 2-tile vertical wrap track (yPercent 0 -> 115 = 1 full 360° cylinder roll) */}
+              {/* Exact Figma 3-repeat seamless vertical wrap track (pitch = 133%: 100% label + 33% black cylinder back)
+                  Hero = 0% (Tile 1) -> About = -266% (Tile 3, 2× 360° spins) -> Shop = -133% (Tile 2, 1× 360° spin) */}
               <div
                 ref={labelTrackRef}
                 className="relative h-full w-[98.27%] will-change-transform"
               >
-                {/* Incoming wrapped label tile (rolls in from top/left during Phase 2) */}
-                <div className="absolute left-0 -top-[115%] h-full w-full">
+                {/* Tile 1 (0% to 100%): Hero resting label */}
+                <Image
+                  src={canCoverGreen}
+                  alt=""
+                  priority
+                  className="relative h-full w-full max-w-none object-fill select-none"
+                  draggable={false}
+                />
+
+                {/* Black back-of-can seam 1 (99.5% to 133.5%) */}
+                <div className="absolute left-0 top-[99.5%] h-[34%] w-full bg-black" />
+
+                {/* Tile 2 (133% to 233%): Mid-Hero spin & Shop resting label */}
+                <div className="absolute left-0 top-[133%] h-full w-full">
                   <Image
                     src={canCoverGreen}
                     alt=""
@@ -100,17 +113,19 @@ export function ScrollCanStage({
                   />
                 </div>
 
-                {/* Black back-of-can cylinder seam separating wrap copies */}
-                <div className="absolute left-0 -top-[15.5%] h-[16.5%] w-full bg-black" />
+                {/* Black back-of-can seam 2 (232.5% to 266.5%) */}
+                <div className="absolute left-0 top-[232.5%] h-[34%] w-full bg-black" />
 
-                {/* Initial front-facing label tile */}
-                <Image
-                  src={canCoverGreen}
-                  alt=""
-                  priority
-                  className="relative h-full w-full max-w-none object-fill select-none"
-                  draggable={false}
-                />
+                {/* Tile 3 (266% to 366%): About resting label */}
+                <div className="absolute left-0 top-[266%] h-full w-full">
+                  <Image
+                    src={canCoverGreen}
+                    alt=""
+                    priority
+                    className="h-full w-full max-w-none object-fill select-none"
+                    draggable={false}
+                  />
+                </div>
               </div>
             </div>
           </div>

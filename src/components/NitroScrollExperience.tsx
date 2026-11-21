@@ -241,7 +241,7 @@ export function NitroScrollExperience() {
           });
 
           // === PHASE 1: Hero (#home) -> About (#about) ===
-          // Smooth viewport-paced glide + horizontal scale-up (0°) behind About tagline
+          // Smooth viewport-paced glide + horizontal scale-up (0°) + 2× 360° masked cylinder spin (0 -> -266%)
           tl.to(
             canEl,
             {
@@ -258,6 +258,16 @@ export function NitroScrollExperience() {
             {
               scale: aboutScale,
               rotation: 0,
+              ease: "power1.inOut",
+              duration: phase1Dur,
+            },
+            0
+          );
+
+          tl.to(
+            labelTrackEl,
+            {
+              yPercent: -266,
               ease: "power1.inOut",
               duration: phase1Dur,
             },
@@ -281,7 +291,7 @@ export function NitroScrollExperience() {
           }
 
           // === PHASE 2: About (#about) -> Shop (#shop) ===
-          // Glide to middle Shop slot + shrink + rotate -90° upright + 360° 3D cylinder label spin
+          // Glide to middle Shop slot + shrink + rotate -90° upright + 1× 360° masked cylinder spin (-266% -> -133%)
           tl.to(
             canEl,
             {
@@ -307,7 +317,7 @@ export function NitroScrollExperience() {
           tl.to(
             labelTrackEl,
             {
-              yPercent: 115,
+              yPercent: -133,
               ease: "power1.inOut",
               duration: phase2Dur,
             },

@@ -16,21 +16,58 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    let lastY = window.scrollY;
+    const THRESHOLD = 8;
+
+    const onScroll = () => {
+      const currentY = Math.max(0, window.scrollY);
+      const delta = currentY - lastY;
+
+      setScrolled(currentY > 24);
+
+      if (currentY <= 40) {
+        setVisible(true);
+        lastY = currentY;
+        return;
+      }
+
+      if (Math.abs(delta) < THRESHOLD) return;
+
+      if (delta > 0) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+
+      lastY = currentY;
+    };
+
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isShown = visible || mobileOpen;
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+    <motion.header
+      initial={false}
+      animate={isShown ? { y: "0%", opacity: 1 } : { y: "-100%", opacity: 0 }}
+      transition={
+        isShown
+          ? { duration: 0.38, ease: [0.22, 1, 0.36, 1] }
+          : { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
+      }
+      onFocus={() => setVisible(true)}
+      className={`fixed top-0 left-0 right-0 z-50 will-change-transform transition-[background-color,border-color,backdrop-filter] duration-300 ${
         scrolled || mobileOpen
-          ? "bg-black/80 backdrop-blur-md"
-          : "bg-transparent"
-      }`}
+          ? "border-b border-white/[0.06] bg-black/80 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      } ${isShown ? "pointer-events-auto" : "pointer-events-none"}`}
     >
       <div className="mx-auto flex h-[76px] sm:h-[108px] w-full max-w-[1920px] items-center justify-between px-5 sm:px-10 lg:px-14 xl:px-[88px]">
         {/* Brand Logo */}
@@ -112,6 +149,6 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }
