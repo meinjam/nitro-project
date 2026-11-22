@@ -11,22 +11,15 @@ interface ScrollCanStageProps {
   canStageRef: RefObject<HTMLDivElement | null>;
   floatWrapperRef: RefObject<HTMLDivElement | null>;
   labelTrackRef: RefObject<HTMLDivElement | null>;
-  heroShadowRef: RefObject<HTMLDivElement | null>;
-  aboutShadowRef: RefObject<HTMLDivElement | null>;
 }
 
 /**
  * Floating GPU-composited stage (`z-15`) that animates the NiTRO GREEN can
- * across Hero -> About (behind tagline `z-25`) -> Shop center pedestal.
+ * along with its attached Figma `Ellipse 1` shadow (`can-hero-shadow.png`):
+ * underneath the horizontal can in Hero & About, and rotating smoothly to the
+ * right side of the vertical can (-90deg) upon landing in Shop.
  */
-export function ScrollCanStage({
-  visible,
-  canStageRef,
-  floatWrapperRef,
-  labelTrackRef,
-  heroShadowRef,
-  aboutShadowRef,
-}: ScrollCanStageProps) {
+export function ScrollCanStage({ visible, canStageRef, floatWrapperRef, labelTrackRef }: ScrollCanStageProps) {
   return (
     <div
       aria-hidden="true"
@@ -38,11 +31,8 @@ export function ScrollCanStage({
         style={{ opacity: 0 }}
       >
         <div ref={floatWrapperRef} className="relative h-full w-full will-change-transform">
-          {/* Hero floor shadow (fades out during Phase 1: Hero -> About) */}
-          <div
-            ref={heroShadowRef}
-            className="pointer-events-none absolute bottom-[-27.4%] left-[-5.6%] z-0 w-[121.65%] will-change-transform"
-          >
+          {/* Attached Figma Ellipse 1 shadow: travels & rotates -90deg with the can into Shop's right-side shadow */}
+          <div className="pointer-events-none absolute bottom-[-27.4%] left-[-5.6%] z-0 w-[121.65%]">
             <Image
               src={canHeroShadow}
               alt=""
@@ -51,16 +41,6 @@ export function ScrollCanStage({
               draggable={false}
             />
           </div>
-
-          {/* About deep ground shadow: pure radial gradient (zero live blur filter for 60/120fps scroll) */}
-          <div
-            ref={aboutShadowRef}
-            className="pointer-events-none absolute right-[-6%] bottom-[-18%] left-[4%] z-0 h-[38%]"
-            style={{
-              background:
-                "radial-gradient(ellipse 50% 48% at 50% 50%, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.62) 48%, rgba(0, 0, 0, 0) 100%)",
-            }}
-          />
 
           <NitroCan labelTrackRef={labelTrackRef} priority className="z-10" />
         </div>

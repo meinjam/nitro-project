@@ -28,8 +28,6 @@ export function NitroScrollExperience() {
   const canStageRef = useRef<HTMLDivElement>(null);
   const floatWrapperRef = useRef<HTMLDivElement>(null);
   const labelTrackRef = useRef<HTMLDivElement>(null);
-  const heroShadowRef = useRef<HTMLDivElement>(null);
-  const aboutShadowRef = useRef<HTMLDivElement>(null);
 
   useSmoothScroll();
 
@@ -47,8 +45,6 @@ export function NitroScrollExperience() {
     canStageRef,
     floatWrapperRef,
     labelTrackRef,
-    heroShadowRef,
-    aboutShadowRef,
   });
 
   return (
@@ -73,8 +69,6 @@ export function NitroScrollExperience() {
         canStageRef={canStageRef}
         floatWrapperRef={floatWrapperRef}
         labelTrackRef={labelTrackRef}
-        heroShadowRef={heroShadowRef}
-        aboutShadowRef={aboutShadowRef}
       />
     </main>
   );

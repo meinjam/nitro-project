@@ -50,7 +50,7 @@ export function ShopProductCard({
         ) : (
           <FlankingCanShadow className={shadowClassName} />
         )}
-        <CanRightShadow uid={`${variant}-${product.id}`} />
+        {(!isCenter || !hideStaticCan) && <CanRightShadow uid={`${variant}-${product.id}`} />}
 
         {isCenter ? (
           <div ref={canAnchorRef} className="relative z-10 aspect-340/896 w-full">

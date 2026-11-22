@@ -24,8 +24,6 @@ export interface CanScrollRefs {
   canStageRef: RefObject<HTMLDivElement | null>;
   floatWrapperRef: RefObject<HTMLDivElement | null>;
   labelTrackRef: RefObject<HTMLDivElement | null>;
-  heroShadowRef: RefObject<HTMLDivElement | null>;
-  aboutShadowRef: RefObject<HTMLDivElement | null>;
 }
 
 function pickVisibleElement(primary: HTMLElement | null, fallback: HTMLElement | null): HTMLElement | null {
@@ -92,8 +90,6 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
           const canEl = refs.canStageRef.current;
           const floatEl = refs.floatWrapperRef.current;
           const labelTrackEl = refs.labelTrackRef.current;
-          const heroShadowEl = refs.heroShadowRef.current;
-          const aboutShadowEl = refs.aboutShadowRef.current;
 
           if (
             !mainEl ||
@@ -153,8 +149,6 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
             force3D: true,
           });
           gsap.set(labelTrackEl, { yPercent: CAN_WRAP_OFFSETS.hero, force3D: true });
-          if (heroShadowEl) gsap.set(heroShadowEl, { opacity: 1 });
-          if (aboutShadowEl) gsap.set(aboutShadowEl, { opacity: 0 });
           if (floatEl) gsap.set(floatEl, { y: 0 });
 
           // Subtle resting float only while near the top of Hero
@@ -207,13 +201,6 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
           tl.to(canEl, { scale: aboutScale, rotation: 0, ease: "power1.inOut", duration: phase1Dur }, 0);
           tl.to(labelTrackEl, { yPercent: CAN_WRAP_OFFSETS.about, ease: "power1.inOut", duration: phase1Dur }, 0);
 
-          if (heroShadowEl) {
-            tl.to(heroShadowEl, { opacity: 0, ease: "power1.out", duration: phase1Dur * 0.65 }, 0);
-          }
-          if (aboutShadowEl) {
-            tl.to(aboutShadowEl, { opacity: 1, ease: "power1.inOut", duration: phase1Dur * 0.7 }, phase1Dur * 0.3);
-          }
-
           // Phase 2: About (#about) -> Shop (#shop)
           // Shrink + rotate -90° upright + 1× 360° masked cylindrical label spin onto middle pedestal
           tl.to(canEl, { x: shopBox.cx, y: shopBox.cy, ease: "none", duration: phase2Dur }, phase1Dur);
@@ -224,9 +211,6 @@ export function useCanScrollTimeline(refs: CanScrollRefs): boolean {
             phase1Dur
           );
 
-          if (aboutShadowEl) {
-            tl.to(aboutShadowEl, { opacity: 0, ease: "power1.out", duration: phase2Dur * 0.38 }, phase1Dur);
-          }
           if (pedestals.length > 0) {
             tl.to(
               pedestals,
