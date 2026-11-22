@@ -11,6 +11,7 @@ Responsive **Next.js (App Router)** landing page with a bidirectional, scroll-sc
   - **Accessible by Default**: Respects `prefers-reduced-motion: reduce` via `gsap.matchMedia()` and Lenis, gracefully rendering static layered cans in each section.
 - **Butter-Smooth Scrolling (`Lenis`)**: Synchronized directly to `gsap.ticker` (`autoRaf: false`, `lagSmoothing(0)`, `scrub: true`) for 60/120fps inertia with zero double-smoothing lag.
 - **Smart Auto-Hide Navbar**: Stays pinned at the top, hides smoothly when scrolling down, and glides back in immediately on reverse (upward) scroll or keyboard focus.
+- **Minimalist Kinetic Brand Preloader (`<NitroPreloader />`)**: Preloads critical Hero imagery and fonts while smoothly sweeping the `NiTRO` wordmark from dim silhouette to `#e0e600` (`00% → 100%`), then opens via a split top/bottom cinema shutter (skipped automatically for `prefers-reduced-motion`).
 - **Single-Source Layered Figma Cans (`<NitroCan />`)**: All 5 product flavors (`NiTRO ENG`, `NiTRO RED`, `NiTRO GREEN`, `NiTRO SKY`, `NiTRO BLUE`) are composed live from `can-base-horizontal.png` + the seamless 3-repeat `can-cover-green-wrap.png` texture using `mix-blend-color-burn` and Figma's exact `mix-blend-hue` flavor fills (`#ff8000`, `#ff0000`, `#00b2ff`, `#0004ff`).
 
 ## Project Structure
@@ -31,7 +32,8 @@ src/
 │   │   └── shop-shadows.tsx          # Figma SVG floor ellipses, right shadow, and glowing green pedestal
 │   ├── about-section.tsx             # Monochrome athlete photo, untransformed anchors, foreground tagline
 │   ├── hero-section.tsx              # Giant NiTRO wordmark, untransformed Hero anchor, 3-zone CTA bar
-│   ├── navbar.tsx                    # Smart auto-hide header + responsive mobile menu
+│   ├── navbar.tsx                    # Smart auto-hide header + morphing mobile menu
+│   ├── nitro-preloader.tsx           # Minimalist kinetic NiTRO wordmark reveal + split shutter preloader
 │   ├── nitro-scroll-experience.tsx   # Scroll orchestrator wiring Lenis, GSAP timeline, sections, and stage
 │   ├── shop-section.tsx              # 5-can desktop stepped showcase & mobile grid
 │   └── social-icons.tsx              # Social profile links
@@ -41,6 +43,7 @@ src/
 ├── hooks/
 │   ├── use-can-scroll-timeline.ts    # Responsive DOM-measured 2-phase GSAP ScrollTrigger timeline
 │   ├── use-navbar-scroll-state.ts    # Hysteresis scroll-direction hook for auto-hide Navbar
+│   ├── use-preloader-progress.ts     # Hero asset + font preload coordinator with eased 0–100% progress
 │   └── use-smooth-scroll.ts          # Lenis + GSAP ticker synchronization hook
 └── lib/
     └── utils.ts                      # `cn()` class-name merger (`clsx` + `tailwind-merge`)
